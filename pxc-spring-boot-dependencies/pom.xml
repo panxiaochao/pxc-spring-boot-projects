@@ -54,7 +54,7 @@
         <kafka.version>2.6.3</kafka.version>
         <lettuce.version>6.0.8.RELEASE</lettuce.version>
         <log4j2.version>2.19.0</log4j2.version>
-        <logback.version>1.2.7</logback.version>
+        <logback.version>1.2.11</logback.version>
         <lombok.version>1.18.24</lombok.version>
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <mongodb.version>4.1.2</mongodb.version>
@@ -83,6 +83,8 @@
         <spring-session-bom.version>2020.0.7</spring-session-bom.version>
         <spring-ws.version>3.0.10.RELEASE</spring-ws.version>
         <tomcat.version>9.0.68</tomcat.version>
+        <pxc-dynamic-datasource-spring-boot.version>2.0.0</pxc-dynamic-datasource-spring-boot.version>
+        <pxc-jwt-commons-spring-boot.version>1.0.7</pxc-jwt-commons-spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -1116,6 +1118,16 @@
                 <version>${spring-session-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${pxc-dynamic-datasource-spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-jwt-commons-spring-boot-starter</artifactId>
+                <version>${pxc-jwt-commons-spring-boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
