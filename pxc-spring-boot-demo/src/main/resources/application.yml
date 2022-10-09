@@ -1,0 +1,12 @@
+# server
+server:
+  port: 18000
+  servlet:
+    context-path: /
+
+spring:
+  # 关闭使用thymeleaf
+  thymeleaf:
+    enabled: false
+  application:
+    name: springboot-demo

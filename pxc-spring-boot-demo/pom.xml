@@ -4,13 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.panxiaochao</groupId>
-    <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2022.0.0-2020.0.6</version>
+    <parent>
+        <groupId>io.github.panxiaochao</groupId>
+        <artifactId>pxc-spring-boot-starter-parent</artifactId>
+        <version>2022.0.0-2.4.13</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>org.example</groupId>
+    <artifactId>pxc-spring-boot-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+
+    </dependencies>
 </project>
