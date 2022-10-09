@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.panxiaochao</groupId>
+        <artifactId>pxc-spring-boot-dependencies</artifactId>
+        <version>2022.0.0-2.4.13</version>
+    </parent>
+    <artifactId>pxc-spring-boot-starter-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>Parent pom from pxc-spring-boot-dependencies</description>
+    <url>https://github.com/panxiaochao/pxc-spring-boot-starter-parent</url>
+
+    <!-- licenses -->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <name>Lypxc</name>
+            <email>545685602@qq.com</email>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <!-- scm -->
+    <scm>
+        <tag>master</tag>
+        <url>https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git</url>
+        <connection>scm:git:https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git</connection>
+        <developerConnection>scm:git:https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git
+        </developerConnection>
+    </scm>
+
+    <!-- properties -->
+    <properties>
+        <java.version>1.8</java.version>
+        <resource.delimiter>@</resource.delimiter>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <!-- build -->
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <!-- 仅包含哪些文件被打包 -->
+                <includes>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.yaml</include>
+                    <include>**/application*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <!-- 仅哪些文件不被打包 -->
+                <excludes>
+                    <exclude>**/application*.yml</exclude>
+                    <exclude>**/application*.yaml</exclude>
+                    <exclude>**/application*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <parameters>true</parameters>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>UTF-8</encoding>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                            <configuration>
+                                <excludeDevtools>true</excludeDevtools>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <mainClass>${start-class}</mainClass>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
