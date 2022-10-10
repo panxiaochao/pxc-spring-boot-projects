@@ -55,17 +55,16 @@
         <lettuce.version>6.0.8.RELEASE</lettuce.version>
         <log4j2.version>2.19.0</log4j2.version>
         <logback.version>1.2.11</logback.version>
+        <disruptor.version>3.4.4</disruptor.version>
         <lombok.version>1.18.24</lombok.version>
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <mongodb.version>4.1.2</mongodb.version>
-        <mysql.version>8.0.27</mysql.version>
+        <mysql.version>8.0.30</mysql.version>
         <netty.version>4.1.70.Final</netty.version>
         <netty-tcnative.version>2.0.46.Final</netty-tcnative.version>
         <oauth2-oidc-sdk.version>8.36.2</oauth2-oidc-sdk.version>
         <nimbus-jose-jwt.version>8.23</nimbus-jose-jwt.version>
-        <ojdbc.version>19.3.0.0</ojdbc.version>
         <okhttp3.version>3.14.9</okhttp3.version>
-        <oracle-database.version>19.8.0.0</oracle-database.version>
         <servlet-api.version>4.0.1</servlet-api.version>
         <slf4j.version>1.7.36</slf4j.version>
         <spring-boot.version>2.4.13</spring-boot.version>
@@ -347,96 +346,6 @@
                 <groupId>com.nimbusds</groupId>
                 <artifactId>nimbus-jose-jwt</artifactId>
                 <version>${nimbus-jose-jwt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>dms</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc10</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc10_g</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc10dms</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc10dms_g</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc8</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc8_g</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc8dms</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ojdbc8dms_g</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ons</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>oraclepki</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>orai18n</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>osdt_cert</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>osdt_core</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>simplefan</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>ucp</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>xdb</artifactId>
-                <version>${ojdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.ojdbc</groupId>
-                <artifactId>xmlparserv2</artifactId>
-                <version>${ojdbc.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
@@ -884,7 +793,11 @@
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.amqp</groupId>
                 <artifactId>spring-amqp</artifactId>
@@ -1074,13 +987,6 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-bom</artifactId>
                 <version>${netty.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.database.jdbc</groupId>
-                <artifactId>ojdbc-bom</artifactId>
-                <version>${oracle-database.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

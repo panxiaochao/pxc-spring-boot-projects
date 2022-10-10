@@ -7,10 +7,70 @@
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-cloud-parent</artifactId>
     <version>2022.0.0-2020.0.6</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>pxc-spring-cloud-parent dependencies</description>
+    <url>https://github.com/panxiaochao/pxc-spring-cloud-parent</url>
 
+    <!-- licenses -->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <name>Lypxc</name>
+            <email>545685602@qq.com</email>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <!-- scm -->
+    <scm>
+        <tag>master</tag>
+        <url>https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git</url>
+        <connection>scm:git:https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git</connection>
+        <developerConnection>scm:git:https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git
+        </developerConnection>
+    </scm>
+
+    <!-- properties -->
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <resource.delimiter>@</resource.delimiter>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 2020.0.x 版本支持 2.4.x, 2.5.x (Starting with 2020.0.3) -->
+        <pxc-spring-boot.version>2022.0.0-2.4.13</pxc-spring-boot.version>
+        <spring-cloud.version>2020.0.6</spring-cloud.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot 依赖管理 -->
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-spring-boot-dependencies</artifactId>
+                <version>${pxc-spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

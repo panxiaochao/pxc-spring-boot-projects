@@ -8,7 +8,7 @@
         <groupId>io.github.panxiaochao</groupId>
         <artifactId>pxc-spring-boot-starter-parent</artifactId>
         <version>2022.0.0-2.4.13</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>org.example</groupId>
@@ -21,6 +21,5 @@
     </properties>
 
     <dependencies>
-
     </dependencies>
 </project>
