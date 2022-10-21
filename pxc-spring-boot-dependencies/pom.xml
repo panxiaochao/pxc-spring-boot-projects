@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-boot-dependencies</artifactId>
-    <version>2022.0.0-2.4.13</version>
+    <version>2022.0.0-2.6</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Pxc Spring Boot Dependencies</description>
