@@ -7,7 +7,7 @@
         <groupId>io.github.panxiaochao</groupId>
         <artifactId>pxc-spring-boot-starter-parent</artifactId>
         <version>2022.0.0-2.6</version>
-        <relativePath></relativePath>
+        <relativePath/>
     </parent>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-boot-dependencies</artifactId>
