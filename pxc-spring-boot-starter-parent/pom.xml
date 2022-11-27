@@ -6,11 +6,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.6.13</version>
+        <version>2.7.6</version>
     </parent>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-boot-starter-parent</artifactId>
-    <version>2022.0.0-2.6</version>
+    <version>2022-2.7-1.0</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Parent pom from spring-boot-dependencies</description>
@@ -63,10 +63,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- base properties -->
-        <spring-boot.version>2.6.13</spring-boot.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
         <log4j2.version>2.19.0</log4j2.version>
         <disruptor.version>3.4.4</disruptor.version>
-        <jackson-bom.version>2.14.0</jackson-bom.version>
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <pxc-dynamic-datasource-spring-boot.version>2.0.0</pxc-dynamic-datasource-spring-boot.version>
         <pxc-jwt-commons-spring-boot.version>1.0.7</pxc-jwt-commons-spring-boot.version>
@@ -223,17 +222,11 @@
                     <executions>
                         <execution>
                             <id>repackage</id>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
                             <configuration>
                                 <excludeDevtools>true</excludeDevtools>
                             </configuration>
                         </execution>
                     </executions>
-                    <configuration>
-                        <mainClass>${start-class}</mainClass>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -242,7 +235,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

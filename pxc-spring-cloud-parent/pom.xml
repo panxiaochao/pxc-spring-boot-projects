@@ -6,12 +6,11 @@
     <parent>
         <groupId>io.github.panxiaochao</groupId>
         <artifactId>pxc-spring-boot-starter-parent</artifactId>
-        <version>2022.0.0-2.6</version>
+        <version>2022-2.7-1.0</version>
     </parent>
 
-    <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2022.0.0-2020.0.6</version>
+    <version>2022-2.7-2020.0.6</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
@@ -49,7 +48,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 2021.0.x 版本支持 2.6.x, 2.7.x (Starting with 2021.0.3) -->
-        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
     </properties>
 
