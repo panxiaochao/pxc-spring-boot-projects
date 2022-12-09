@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2022-2.7-2020.0.6</version>
+    <version>2022-2.7-1.0-2020.0.6</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
