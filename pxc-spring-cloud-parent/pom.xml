@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2022-2.7-1.0-2020.0.6</version>
+    <version>2022-2021.0.5-1.0</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
@@ -36,9 +36,9 @@
     <!-- scm -->
     <scm>
         <tag>master</tag>
-        <url>https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git</url>
-        <connection>scm:git:https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git</connection>
-        <developerConnection>scm:git:https://github.com/panxiaochao/pxc-spring-boot-starter-parent.git
+        <url>https://github.com/panxiaochao/pxc-spring-cloud-parent.git</url>
+        <connection>scm:git:https://github.com/panxiaochao/pxc-spring-cloud-parent.git</connection>
+        <developerConnection>scm:git:https://github.com/panxiaochao/pxc-spring-cloud-parent.git
         </developerConnection>
     </scm>
 
