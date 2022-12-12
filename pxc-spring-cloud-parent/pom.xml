@@ -38,8 +38,7 @@
         <tag>master</tag>
         <url>https://github.com/panxiaochao/pxc-spring-cloud-parent.git</url>
         <connection>scm:git:https://github.com/panxiaochao/pxc-spring-cloud-parent.git</connection>
-        <developerConnection>scm:git:https://github.com/panxiaochao/pxc-spring-cloud-parent.git
-        </developerConnection>
+        <developerConnection>scm:git:https://github.com/panxiaochao/pxc-spring-cloud-parent.git</developerConnection>
     </scm>
 
     <!-- properties -->
