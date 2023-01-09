@@ -70,6 +70,7 @@
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <pxc-dynamic-datasource-spring-boot.version>2.0.0</pxc-dynamic-datasource-spring-boot.version>
         <pxc-jwt-commons-spring-boot.version>1.0.7</pxc-jwt-commons-spring-boot.version>
+        <pxc-framework.version>2022-2.7-1.1</pxc-framework.version>
         <org.yaml.version>1.33</org.yaml.version>
     </properties>
 
@@ -85,6 +86,11 @@
                 <groupId>io.github.panxiaochao</groupId>
                 <artifactId>pxc-jwt-commons-spring-boot-starter</artifactId>
                 <version>${pxc-jwt-commons-spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-framework-bom</artifactId>
+                <version>${pxc-framework.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -227,6 +233,9 @@
                     <executions>
                         <execution>
                             <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
                             <configuration>
                                 <excludeDevtools>true</excludeDevtools>
                             </configuration>
