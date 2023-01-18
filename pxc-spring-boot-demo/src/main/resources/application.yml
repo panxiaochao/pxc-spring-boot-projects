@@ -10,3 +10,11 @@ spring:
     enabled: false
   application:
     name: springboot-demo
+  # 多线程
+  thread:
+    enabled: true
+
+# 日志追踪
+pxc:
+  trace:
+    enabled: true
