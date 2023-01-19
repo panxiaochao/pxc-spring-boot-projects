@@ -23,12 +23,6 @@
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-springdoc</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>springdoc-openapi-webflux-core</artifactId>
-                    <groupId>org.springdoc</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -50,6 +44,11 @@
                     <groupId>io.github.panxiaochao</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.panxiaochao</groupId>
+            <artifactId>pxc-framework-web</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -42,7 +42,7 @@ public class TestController {
         user.setUserName("潘骁超");
         user.setCreateDate(new Date());
 
-        threadPoolTaskManager.execute("无参接口", () -> {
+        threadPoolTaskManager.execute(() -> {
             LOGGER.info("threadPoolTaskManager !!!");
         });
         return user;
