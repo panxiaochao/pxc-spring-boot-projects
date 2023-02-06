@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2022-2021.0.5-1.0</version>
+    <version>2022-2021.0.5-1.1</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
@@ -19,7 +19,7 @@
         </license>
     </licenses>
 
-    <!-- 开发者 -->
+    <!-- developers -->
     <developers>
         <developer>
             <name>Lypxc</name>

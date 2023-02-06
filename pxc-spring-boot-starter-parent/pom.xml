@@ -25,7 +25,7 @@
         </license>
     </licenses>
 
-    <!-- 开发者 -->
+    <!-- developers -->
     <developers>
         <developer>
             <name>Lypxc</name>
@@ -43,7 +43,7 @@
         </developerConnection>
     </scm>
 
-    <!-- ossrh -->
+    <!-- distributionManagement -->
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -96,17 +96,6 @@
 
     <!-- default dependency spring boot import -->
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                    <groupId>org.springframework.boot</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
 
     <!-- build -->
