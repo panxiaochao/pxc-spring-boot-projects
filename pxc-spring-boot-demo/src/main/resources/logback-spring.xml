@@ -8,6 +8,7 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+    <!-- 全局配置 -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
