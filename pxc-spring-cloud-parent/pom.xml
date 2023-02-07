@@ -48,6 +48,9 @@
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <pxc-dynamic-datasource-spring-boot.version>2.0.0</pxc-dynamic-datasource-spring-boot.version>
+        <pxc-jwt-commons-spring-boot.version>1.0.7</pxc-jwt-commons-spring-boot.version>
+        <pxc-framework.version>2022-2.7-1.2</pxc-framework.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +78,29 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- pxc-dynamic-datasource-spring-boot-starter 依赖管理 -->
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${pxc-dynamic-datasource-spring-boot.version}</version>
+            </dependency>
+
+            <!-- pxc-jwt-commons-spring-boot-starter 依赖管理 -->
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-jwt-commons-spring-boot-starter</artifactId>
+                <version>${pxc-jwt-commons-spring-boot.version}</version>
+            </dependency>
+
+            <!-- Pxc-framework 依赖管理 -->
+            <dependency>
+                <groupId>io.github.panxiaochao</groupId>
+                <artifactId>pxc-framework-bom</artifactId>
+                <version>${pxc-framework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -181,6 +207,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
                 <configuration>
                     <attach>true</attach>
                 </configuration>
