@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2022-2021.0.5-1.1</version>
+    <version>2022-2021.0.5-1.2</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
@@ -44,13 +44,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 2021.0.x 版本支持 2.6.x, 2.7.x (Starting with 2021.0.3) -->
-        <spring-boot.version>2.7.8</spring-boot.version>
+        <spring-boot.version>2.7.9</spring-boot.version>
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <pxc-dynamic-datasource-spring-boot.version>2.0.0</pxc-dynamic-datasource-spring-boot.version>
-        <pxc-jwt-commons-spring-boot.version>1.0.7</pxc-jwt-commons-spring-boot.version>
-        <pxc-framework.version>2022-2.7-1.2</pxc-framework.version>
     </properties>
 
     <dependencyManagement>
@@ -78,29 +75,6 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- pxc-dynamic-datasource-spring-boot-starter 依赖管理 -->
-            <dependency>
-                <groupId>io.github.panxiaochao</groupId>
-                <artifactId>pxc-dynamic-datasource-spring-boot-starter</artifactId>
-                <version>${pxc-dynamic-datasource-spring-boot.version}</version>
-            </dependency>
-
-            <!-- pxc-jwt-commons-spring-boot-starter 依赖管理 -->
-            <dependency>
-                <groupId>io.github.panxiaochao</groupId>
-                <artifactId>pxc-jwt-commons-spring-boot-starter</artifactId>
-                <version>${pxc-jwt-commons-spring-boot.version}</version>
-            </dependency>
-
-            <!-- Pxc-framework 依赖管理 -->
-            <dependency>
-                <groupId>io.github.panxiaochao</groupId>
-                <artifactId>pxc-framework-bom</artifactId>
-                <version>${pxc-framework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
