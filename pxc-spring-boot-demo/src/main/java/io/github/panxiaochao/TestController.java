@@ -1,7 +1,11 @@
 package io.github.panxiaochao;
 
+import io.github.panxiaochao.common.response.R;
+import io.github.panxiaochao.file.storage.engine.FileStorageEngine;
+import io.github.panxiaochao.file.storage.meta.FileMetadata;
 import io.github.panxiaochao.threadpool.executor.ThreadPoolTaskManager;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
@@ -10,7 +14,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,6 +41,8 @@ public class TestController {
 
     private final ThreadPoolTaskManager threadPoolTaskManager;
 
+    private final FileStorageEngine fileStorageEngine;
+
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc")
     public User getUser() {
@@ -57,6 +65,14 @@ public class TestController {
     @PostMapping("/post/pxc")
     public User postPxc(@RequestBody User user) {
         return user;
+    }
+
+    @Operation(summary = "上传文件接口", description = "上传文件接口描述", method = "POST")
+    @PostMapping(path = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public R<FileMetadata> upload(
+            @Parameter(description = "要上传的文件", required = true) @RequestPart("file") MultipartFile file) {
+        FileMetadata fileMetadata = fileStorageEngine.upload(file);
+        return R.ok(fileMetadata);
     }
 
     @Getter

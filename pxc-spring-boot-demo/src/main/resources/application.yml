@@ -13,8 +13,17 @@ spring:
   # 多线程
   thread:
     enabled: true
+  main:
+    web-application-type: servlet
 
 # 日志追踪
 pxc:
   trace:
     enabled: true
+
+file-storage:
+  enabled: true
+  storage-type: local
+  storage-path: /Users/Lypxc/Documents/upload
+  local:
+    platform: macos

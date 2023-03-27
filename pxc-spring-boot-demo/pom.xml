@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-log</artifactId>
+            <artifactId>pxc-framework-trace-log</artifactId>
         </dependency>
 
         <dependency>
@@ -49,6 +49,16 @@
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.panxiaochao</groupId>
+            <artifactId>pxc-framework-file-storage</artifactId>
         </dependency>
 
         <dependency>
