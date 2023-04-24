@@ -21,9 +21,14 @@ pxc:
   trace:
     enabled: true
 
+# 文件存储
 file-storage:
   enabled: true
   storage-type: local
   storage-path: /Users/Lypxc/Documents/upload
   local:
     platform: macos
+
+# 自定义插件发布，可热插拔
+plugin-ext:
+  enabled: false
