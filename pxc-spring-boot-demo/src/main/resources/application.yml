@@ -5,6 +5,11 @@ server:
     context-path: /
 
 spring:
+  operatelog:
+    enabled: true
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
   # 关闭使用thymeleaf
   thymeleaf:
     enabled: false
@@ -12,9 +17,11 @@ spring:
     name: springboot-demo
   # 多线程
   thread:
-    enabled: true
-  main:
-    web-application-type: servlet
+    async: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    accessRateLimit: true
 
 # 日志追踪
 pxc:
@@ -32,3 +39,12 @@ file-storage:
 # 自定义插件发布，可热插拔
 plugin-ext:
   enabled: false
+
+minio:
+  enabled: true
+  endpoint: http://134.98.6.38
+  port: 9000
+  access-key: hzfileadmin
+  secret-key: hzfileadmin
+  secure: false
+  bucket: pxc-test
