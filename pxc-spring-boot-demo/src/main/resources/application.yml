@@ -5,46 +5,18 @@ server:
     context-path: /
 
 spring:
+  pxc-framework:
+    async: true
   operatelog:
-    enabled: true
+    handler: io.github.test.handle.OperateLogHandler
+    log-type: other
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
-  # 关闭使用thymeleaf
-  thymeleaf:
-    enabled: false
   application:
     name: springboot-demo
-  # 多线程
-  thread:
-    async: false
   redis:
-    host: 127.0.0.1
+    url: 127.0.0.1
     port: 6379
-    accessRateLimit: true
-
-# 日志追踪
-pxc:
-  trace:
-    enabled: true
-
-# 文件存储
-file-storage:
-  enabled: true
-  storage-type: local
-  storage-path: /Users/Lypxc/Documents/upload
-  local:
-    platform: macos
-
-# 自定义插件发布，可热插拔
-plugin-ext:
-  enabled: false
-
-minio:
-  enabled: true
-  endpoint: http://134.98.6.38
-  port: 9000
-  access-key: hzfileadmin
-  secret-key: hzfileadmin
-  secure: false
-  bucket: pxc-test
+    database: 0
+#    key-prefix: pxc
