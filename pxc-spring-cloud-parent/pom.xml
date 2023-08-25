@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
@@ -56,7 +56,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 2021.0.x 版本支持 2.6.x, 2.7.x (Starting with 2021.0.3) -->
-        <spring-boot.version>2.7.13</spring-boot.version>
+        <spring-boot.version>2.7.15</spring-boot.version>
         <spring-cloud.version>2021.0.8</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -64,15 +64,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Boot 依赖管理 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <!-- Spring Cloud 依赖管理 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -112,17 +103,7 @@
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
-        </dependency>
-        <!-- 元数据注解 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- 监控指标 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>2.9.3</version>
         </dependency>
     </dependencies>
 
@@ -187,6 +168,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- spring boot maven plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
             <!-- 生成sources源码包的插件 -->
