@@ -6,6 +6,8 @@ import io.github.panxiaochao.core.utils.sysinfo.ServerInfo;
 import io.github.panxiaochao.operate.log.core.annotation.OperateLog;
 import io.github.panxiaochao.ratelimiter.annotation.RateLimiter;
 import io.github.panxiaochao.redis.utils.RedissonUtil;
+import io.github.panxiaochao.sensitive.annotation.FSensitive;
+import io.github.panxiaochao.sensitive.enums.FSensitiveStrategy;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -69,6 +71,11 @@ public class TestController {
         user.setId(id);
         user.setUserName(username);
         user.setCreateDate(new Date());
+        user.setIdCard("210397198608215431");
+        user.setPhone("17640125371");
+        user.setAddress("北京市朝阳区某某四合院1203室");
+        user.setEmail("17640125371@163.com");
+        user.setBankCard("6226456952351452853");
         return user;
     }
 
@@ -91,6 +98,17 @@ public class TestController {
         return R.ok(SystemServerUtil.INSTANCE().getServerInfo());
     }
 
+    /**
+     * Redis publish 发布通知
+     */
+    @GetMapping("/redis/publish")
+    public R<String> publish() {
+        for (int i = 0; i < 10; i++) {
+            RedissonUtil.INSTANCE().publish("publishKey", "publish msg: " + LocalDateTime.now());
+        }
+        return R.ok();
+    }
+
     @Getter
     @Setter
     @ToString
@@ -102,6 +120,41 @@ public class TestController {
 
         @Schema(description = "用户名")
         private String userName;
+
+        /**
+         * 身份证
+         */
+        @FSensitive(strategy = FSensitiveStrategy.ID_CARD)
+        @Schema(description = "身份证")
+        private String idCard;
+
+        /**
+         * 电话
+         */
+        @FSensitive(strategy = FSensitiveStrategy.PHONE)
+        @Schema(description = "电话")
+        private String phone;
+
+        /**
+         * 地址
+         */
+        @FSensitive(strategy = FSensitiveStrategy.ADDRESS)
+        @Schema(description = "地址")
+        private String address;
+
+        /**
+         * 邮箱
+         */
+        @FSensitive(strategy = FSensitiveStrategy.EMAIL)
+        @Schema(description = "邮箱")
+        private String email;
+
+        /**
+         * 银行卡
+         */
+        @FSensitive(strategy = FSensitiveStrategy.BANK_CARD)
+        @Schema(description = "银行卡")
+        private String bankCard;
 
         @Schema(description = "int-ID")
         private int intId;
