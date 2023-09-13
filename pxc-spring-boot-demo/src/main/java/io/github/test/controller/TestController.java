@@ -4,6 +4,7 @@ import io.github.panxiaochao.core.response.R;
 import io.github.panxiaochao.core.utils.SystemServerUtil;
 import io.github.panxiaochao.core.utils.sysinfo.ServerInfo;
 import io.github.panxiaochao.operate.log.core.annotation.OperateLog;
+import io.github.panxiaochao.qrcode.utils.QRCodeUtil;
 import io.github.panxiaochao.ratelimiter.annotation.RateLimiter;
 import io.github.panxiaochao.redis.utils.RedissonUtil;
 import io.github.panxiaochao.sensitive.annotation.FSensitive;
@@ -17,6 +18,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -107,6 +110,19 @@ public class TestController {
             RedissonUtil.INSTANCE().publish("publishKey", "publish msg: " + LocalDateTime.now());
         }
         return R.ok();
+    }
+
+    /**
+     * 获取二维码
+     */
+    @GetMapping("/qrcode")
+    public ResponseEntity<byte[]> qrcode(String content) {
+        ResponseEntity.BodyBuilder bodyBuilder = ResponseEntity.ok();
+        // 设置ContentType的值 IMAGE_PNG在浏览器返回图片
+        bodyBuilder.contentType(MediaType.IMAGE_PNG);
+        // image content
+        byte[] qrcodeBytes = QRCodeUtil.build(content).toBytes();
+        return bodyBuilder.body(qrcodeBytes);
     }
 
     @Getter
