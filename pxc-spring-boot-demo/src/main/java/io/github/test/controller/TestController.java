@@ -23,12 +23,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * {@code TestController}
@@ -58,7 +58,7 @@ public class TestController {
             user.setUserName("潘骁超");
             user.setCreateDate(new Date());
             user.setCreateDateTime(LocalDateTime.now());
-            RedissonUtil.INSTANCE().set("user", user, 60, TimeUnit.SECONDS);
+            RedissonUtil.INSTANCE().set("user", user, Duration.ofSeconds(60));
         } else {
             LOGGER.info("user get from Redis !");
         }

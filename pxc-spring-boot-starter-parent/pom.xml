@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.7.15</version>
+        <version>2.7.18</version>
     </parent>
 
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-boot-starter-parent</artifactId>
-    <version>2.0.3-SNAPSHOT</version>
+    <version>2.0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Parent pom from spring-boot-dependencies 2.7 latest</description>
@@ -64,9 +64,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- base properties -->
-        <spring-boot.version>2.7.15</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <pxc-framework.version>2.0.3-SNAPSHOT</pxc-framework.version>
+        <pxc-framework.version>2.0.4-SNAPSHOT</pxc-framework.version>
     </properties>
 
     <!-- custom dependencyManagement spring boot import -->
