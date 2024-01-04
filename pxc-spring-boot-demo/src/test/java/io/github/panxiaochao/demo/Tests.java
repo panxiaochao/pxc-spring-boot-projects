@@ -1,6 +1,8 @@
 package io.github.panxiaochao.demo;
 
+import cn.hutool.system.oshi.OshiUtil;
 import org.springframework.util.CollectionUtils;
+import oshi.util.GlobalConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +20,9 @@ import java.util.stream.IntStream;
 public class Tests {
     public static void main(String[] args) {
         //test1();
-        test2();
+//        test2();
+        GlobalConfig.set(GlobalConfig.OSHI_OS_WINDOWS_CPU_UTILITY, true);
+        System.out.println(OshiUtil.getCpuInfo().toString());
     }
 
     static void test1() {
