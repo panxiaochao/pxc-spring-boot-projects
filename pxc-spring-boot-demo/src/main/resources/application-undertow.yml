@@ -1,0 +1,35 @@
+# server
+server:
+  undertow:
+    threads:
+      # 指定工作者线程的 I/0 线程数，默认为 2 或者 CPU 的个数
+      io: 4
+      # 指定工作者线程个数，默认为 I/O 线程个数的 8 倍
+      worker: 32
+    # 是否分配的直接内存
+    direct-buffers: true
+    # 每块buffer的空间大小，越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
+    buffer-size: 1024
+  port: 18000
+  servlet:
+    context-path: /
+  # 开启压缩
+  compression:
+    enabled: true
+
+spring:
+  pxc-framework:
+    async: true
+  operatelog:
+    handler: io.github.test.handle.OperateLogHandler
+    log-type: other
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  application:
+    name: springboot-demo
+  redis:
+    url: 127.0.0.1
+    port: 6379
+    database: 0
+#    key-prefix: pxc
