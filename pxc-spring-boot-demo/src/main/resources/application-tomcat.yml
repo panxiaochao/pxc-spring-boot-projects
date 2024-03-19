@@ -1,0 +1,49 @@
+# server
+server:
+  port: 18000
+  servlet:
+    context-path: /
+  # 开启压缩
+  compression:
+    enabled: true
+
+spring:
+  pxc-framework:
+    async: true
+  operatelog:
+    handler: io.github.test.handle.OperateLogHandler
+    log-type: other
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  application:
+    name: springboot-demo
+  # 数据库
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: root123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+      idle-timeout: 60000
+      max-lifetime: 60000
+      connection-timeout: 30000
+      pool-name: pxc-system-pool
+  redis:
+    url: 127.0.0.1
+    port: 6379
+    database: 0
+#    key-prefix: pxc
+
+# mybatis-plus 配置
+mybatis-plus:
+  db-type: mysql
+  global-config:
+    banner: false
+  configuration:
+    map-underscore-to-camel-case: true
+    # 开发测试时使用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

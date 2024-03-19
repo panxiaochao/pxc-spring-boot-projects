@@ -1,14 +1,12 @@
-package io.github.test;
+package io.github;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
 import java.net.InetAddress;
@@ -18,7 +16,8 @@ import java.net.InetAddress;
  *
  * @author Lypxc
  */
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JdbcTemplateAutoConfiguration.class, RedisRepositoriesAutoConfiguration.class})
+@SpringBootApplication
+@EnableTransactionManagement
 public class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
