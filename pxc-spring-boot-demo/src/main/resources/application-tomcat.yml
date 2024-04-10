@@ -8,11 +8,16 @@ server:
     enabled: true
 
 spring:
+  # pxc-framework 属性
   pxc-framework:
     async: true
-  operatelog:
-    handler: io.github.test.handle.OperateLogHandler
-    log-type: other
+    operatelog:
+      handler: io.github.test.handle.OperateLogHandler
+      log-type: other
+    cache:
+      cache-type: redis
+  #    redis:
+  #      key-prefix: pxc
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
@@ -33,10 +38,10 @@ spring:
       connection-timeout: 30000
       pool-name: pxc-system-pool
   redis:
-    url: 127.0.0.1
     port: 6379
     database: 0
-#    key-prefix: pxc
+    host: 127.0.0.1
+
 
 # mybatis-plus 配置
 mybatis-plus:

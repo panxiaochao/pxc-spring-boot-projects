@@ -18,9 +18,16 @@ import lombok.Setter;
 import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -68,7 +75,8 @@ public class TestController {
 
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc/{id}")
-    @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
+//    @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
+    @Cacheable(cacheNames = "user", key = "#id")
     public User getUser(@PathVariable String id, @RequestParam(required = false) String username) {
         User user = new User();
         user.setId(id);
