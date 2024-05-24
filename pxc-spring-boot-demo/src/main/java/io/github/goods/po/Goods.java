@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
  * <p>  持久化对象
  *
@@ -22,10 +24,22 @@ public class Goods {
     private Integer id;
 
     /**
+     * 活动ID
+     */
+    @TableField("activity_id")
+    private Integer activityId;
+
+    /**
      * 商品名称
      */
     @TableField("good_name")
     private String goodName;
+
+    /**
+     * 中奖概率
+     */
+    @TableField("probability")
+    private BigDecimal probability;
 
     /**
      * 库存

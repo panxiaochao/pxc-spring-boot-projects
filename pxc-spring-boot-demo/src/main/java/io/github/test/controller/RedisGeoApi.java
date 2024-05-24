@@ -32,27 +32,27 @@ public class RedisGeoApi {
     @Operation(summary = "上报地址", description = "上报地址", method = "POST")
     @PostMapping("/add")
     public R<Void> geoAdd(String name, Double lng, Double lat) {
-        RedissonUtil.INSTANCE().geoAdd(GEO_KEY, lng, lat, name);
+        RedissonUtil.geoAdd(GEO_KEY, lng, lat, name);
         return R.ok();
     }
 
     @Operation(summary = "获取两者之间距离", description = "获取两者之间距离", method = "GET")
     @GetMapping("/distance")
     public R<String> getDistance(String firstMember, String secondMember) {
-        Double distance = RedissonUtil.INSTANCE().distance(GEO_KEY, firstMember, secondMember, GeoUnit.KILOMETERS);
+        Double distance = RedissonUtil.distance(GEO_KEY, firstMember, secondMember, GeoUnit.KILOMETERS);
         return R.ok(firstMember + "距离" + secondMember + "家：" + distance + "公里");
     }
 
     @Operation(summary = "获取成员的距离", description = "获取成员的距离", method = "GET")
     @GetMapping("/findPosition")
     public R<Object> findPosition(String member) {
-        return R.ok(RedissonUtil.INSTANCE().position(GEO_KEY, member));
+        return R.ok(RedissonUtil.position(GEO_KEY, member));
     }
 
     @Operation(summary = "查找附近的人", description = "查找附近的人", method = "GET")
     @GetMapping("/nearBy")
     public R<Object> nearBy(Double lng, Double lat) {
-        return R.ok(RedissonUtil.INSTANCE().search(GEO_KEY, lng, lat, 5, GeoUnit.KILOMETERS, 5));
+        return R.ok(RedissonUtil.search(GEO_KEY, lng, lat, 5, GeoUnit.KILOMETERS, 5));
     }
 
 }

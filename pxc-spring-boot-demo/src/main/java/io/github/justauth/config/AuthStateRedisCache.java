@@ -29,7 +29,7 @@
 //     */
 //    @Override
 //    public void cache(String key, String value) {
-//        RedissonUtil.INSTANCE().set(key, value, Duration.ofSeconds(EXPIRE));
+//        RedissonUtil.set(key, value, Duration.ofSeconds(EXPIRE));
 //    }
 //
 //    /**
@@ -41,7 +41,7 @@
 //     */
 //    @Override
 //    public void cache(String key, String value, long timeout) {
-//        RedissonUtil.INSTANCE().set(key, value, Duration.ofSeconds(timeout));
+//        RedissonUtil.set(key, value, Duration.ofSeconds(timeout));
 //    }
 //
 //    /**
@@ -52,7 +52,7 @@
 //     */
 //    @Override
 //    public String get(String key) {
-//        return RedissonUtil.INSTANCE().get(key);
+//        return RedissonUtil.get(key);
 //    }
 //
 //    /**
@@ -63,6 +63,6 @@
 //     */
 //    @Override
 //    public boolean containsKey(String key) {
-//        return RedissonUtil.INSTANCE().isExists(key);
+//        return RedissonUtil.isExists(key);
 //    }
 //}

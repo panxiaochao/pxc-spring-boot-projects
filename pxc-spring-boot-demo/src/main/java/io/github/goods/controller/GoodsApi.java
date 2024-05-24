@@ -1,10 +1,12 @@
 package io.github.goods.controller;
 
 import io.github.goods.dao.GoodsServiceDao;
+import io.github.goods.po.Goods;
 import io.github.panxiaochao.core.response.R;
 import io.github.panxiaochao.core.utils.JacksonUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,37 @@ public class GoodsApi {
 
     private final GoodsServiceDao goodsServiceDao;
 
+    private final RedissonClient redissonClient;
+
+    @GetMapping("/initRedis")
+    public R<Void> initGoodsRedis() {
+        goodsServiceDao.initGoodsRedis();
+        return R.ok();
+    }
+
+    @GetMapping("/drawsByRedis")
+    public R<Object> drawsByRedis(int activityId) {
+        Goods goods = goodsServiceDao.drawsGoodsByRedis(activityId);
+        if (goods == null) {
+            return R.ok("没有抢到");
+        }
+        return R.ok(goods);
+    }
+
+    @GetMapping("/draws")
+    public R<Object> draws(int activityId) {
+        Goods goods = goodsServiceDao.drawsGoods(activityId);
+        if (goods == null) {
+            return R.ok("没有抢到");
+        }
+        return R.ok(goods);
+    }
+
+    @GetMapping("/test")
+    public R<Goods> test() {
+        return R.ok();
+    }
+
     @GetMapping("/buy")
     public R<Void> buyGoods(int id) {
         int threadCount = 20;
@@ -46,13 +79,15 @@ public class GoodsApi {
                     open.await();
                     System.out.println("当前线程: " + Thread.currentThread().getName() + " 开始请求, 时间: " + LocalDateTime.now());
                     //执行业务代码
+                    long start = System.currentTimeMillis();
                     int result = goodsServiceDao.updateByPrimaryKeyStore(id);
+                    long cost = System.currentTimeMillis() - start;
                     if (result == 1) {
                         System.out.println("当前线程: " + Thread.currentThread().getName() + " 抢到啦");
-                        requestMap.put(Thread.currentThread().getName(), "--- 抢到了 ---");
+                        requestMap.put(Thread.currentThread().getName(), "--- 抢到了 ---" + " 耗时：" + cost);
                     } else {
                         System.out.println("当前线程: " + Thread.currentThread().getName() + " 没有抢到");
-                        requestMap.put(Thread.currentThread().getName(), "没有抢到");
+                        requestMap.put(Thread.currentThread().getName(), "没有抢到" + " 耗时：" + cost);
                     }
                     buyers.countDown();
                 } catch (InterruptedException e) {

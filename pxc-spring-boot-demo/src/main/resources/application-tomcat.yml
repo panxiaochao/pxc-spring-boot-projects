@@ -6,6 +6,12 @@ server:
   # 开启压缩
   compression:
     enabled: true
+  tomcat:
+    threads:
+      max: 500
+    mbeanregistry:
+      enabled: true
+
 
 spring:
   # pxc-framework 属性
@@ -31,7 +37,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      minimum-idle: 5
+      minimum-idle: 10
       maximum-pool-size: 50
       idle-timeout: 60000
       max-lifetime: 60000
@@ -41,7 +47,6 @@ spring:
     port: 6379
     database: 0
     host: 127.0.0.1
-
 
 # mybatis-plus 配置
 mybatis-plus:

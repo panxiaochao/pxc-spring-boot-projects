@@ -17,7 +17,7 @@ public class RedissonListener implements ApplicationRunner, Ordered {
 
     @Override
     public void run(ApplicationArguments args) {
-        RedissonUtil.INSTANCE().subscribe("publishKey", String.class, (msg) -> {
+        RedissonUtil.subscribe("publishKey", String.class, (msg) -> {
             System.out.println("订阅通道 => publishKey, 接收值 => " + msg);
         });
     }

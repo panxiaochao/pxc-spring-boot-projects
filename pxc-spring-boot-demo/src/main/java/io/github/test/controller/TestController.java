@@ -1,7 +1,9 @@
 package io.github.test.controller;
 
 import io.github.panxiaochao.core.response.R;
+import io.github.panxiaochao.core.utils.StrUtil;
 import io.github.panxiaochao.core.utils.SystemServerUtil;
+import io.github.panxiaochao.core.utils.metrics.TomcatMetric;
 import io.github.panxiaochao.core.utils.sysinfo.ServerInfo;
 import io.github.panxiaochao.operate.log.core.annotation.OperateLog;
 import io.github.panxiaochao.qrcode.utils.QRCodeUtil;
@@ -16,9 +18,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,15 +36,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Properties;
+import java.util.Set;
 
 /**
- * {@code TestController}
- * <p>
- * description:
+ * <p>测试Api</p>
  *
  * @author Lypxc
  * @since 2022-11-25
@@ -53,19 +59,21 @@ public class TestController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
+    private final RedissonConnectionFactory connectionFactory;
+
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc")
     @RateLimiter
     @OperateLog(title = "测试模块", description = "无参接口")
     // @RepeatSubmitLimiter
     public R<User> getUser() {
-        User user = RedissonUtil.INSTANCE().get("user");
+        User user = RedissonUtil.get("user");
         if (Objects.isNull(user)) {
             user = new User();
             user.setUserName("潘骁超");
             user.setCreateDate(new Date());
             user.setCreateDateTime(LocalDateTime.now());
-            RedissonUtil.INSTANCE().set("user", user, Duration.ofSeconds(60));
+            RedissonUtil.set("user", user, Duration.ofSeconds(60));
         } else {
             LOGGER.info("user get from Redis !");
         }
@@ -115,9 +123,53 @@ public class TestController {
     @GetMapping("/redis/publish")
     public R<String> publish() {
         for (int i = 0; i < 10; i++) {
-            RedissonUtil.INSTANCE().publish("publishKey", "publish msg: " + LocalDateTime.now());
+            RedissonUtil.publish("publishKey", "publish msg: " + LocalDateTime.now());
         }
         return R.ok();
+    }
+
+    /**
+     * Redis 缓存监控
+     */
+    @GetMapping("/redis/cache")
+    public R<Properties> redisCache() {
+        RedisConnection connection = connectionFactory.getConnection();
+        Properties commandStats = connection.info("commandstats");
+
+        List<Map<String, String>> pieList = new ArrayList<>();
+        if (commandStats != null) {
+            commandStats.stringPropertyNames().forEach(key -> {
+                Map<String, String> data = new HashMap<>(2);
+                String property = commandStats.getProperty(key);
+                data.put("name", StrUtil.removeStart(key, "cmdstat_"));
+                data.put("value", StrUtil.substringBetween(property, "calls=", ",usec"));
+                pieList.add(data);
+            });
+        }
+        System.out.println(pieList);
+        System.out.println(connection.dbSize());
+        return R.ok(connection.info());
+    }
+
+    /**
+     * Redis 分页
+     */
+    @GetMapping("/redis/page")
+    public R<Map<String, String>> redisPage() {
+        String key = "Auth-user:loginUser:online:*";
+        Set<String> keySet = RedissonUtil.getKeysByPattern(key);
+        String[] keys = keySet.stream().skip(0).limit(10).toArray(String[]::new);
+        Map<String, String> map = RedissonUtil.get(keys);
+        return R.ok(map);
+    }
+
+    /**
+     * Redis 分页
+     */
+    @GetMapping("/tomcat/metric")
+    public R<Map<String, Object>> tomcatMetric(String name) {
+        TomcatMetric tomcatMetric = new TomcatMetric();
+        return R.ok(tomcatMetric.getMetrics(name));
     }
 
     /**
