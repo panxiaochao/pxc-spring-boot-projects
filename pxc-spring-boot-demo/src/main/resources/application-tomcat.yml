@@ -6,11 +6,6 @@ server:
   # 开启压缩
   compression:
     enabled: true
-  tomcat:
-    threads:
-      max: 500
-    mbeanregistry:
-      enabled: true
 
 
 spring:
@@ -35,6 +30,10 @@ spring:
     username: root
     password: root123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: dm.jdbc.driver.DmDriver
+#    url: jdbc:dm://134.98.6.38:5237/SRT_CLOUD
+#    username: SRT_CLOUD
+#    password: SRT_CLOUD@2024
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 10
@@ -50,7 +49,7 @@ spring:
 
 # mybatis-plus 配置
 mybatis-plus:
-  db-type: mysql
+  db-type: dm
   global-config:
     banner: false
   configuration:

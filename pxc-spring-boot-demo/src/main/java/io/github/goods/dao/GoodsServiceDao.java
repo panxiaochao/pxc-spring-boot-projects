@@ -16,4 +16,6 @@ public interface GoodsServiceDao {
     Goods drawsGoodsByRedis(int activityId);
 
     void initGoodsRedis();
+
+    Goods one(int activityId);
 }

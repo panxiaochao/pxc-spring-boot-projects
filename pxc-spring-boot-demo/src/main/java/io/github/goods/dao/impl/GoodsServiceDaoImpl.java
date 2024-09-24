@@ -179,6 +179,11 @@ public class GoodsServiceDaoImpl extends ServiceImpl<GoodsMapper, Goods> impleme
         goodsList.forEach(s -> rMap.put(s.getId(), s));
     }
 
+    @Override
+    public Goods one(int activityId) {
+        return goodsMapper.selectById(activityId);
+    }
+
 
     @Override
     public Goods drawsGoods(int activityId) {

@@ -1,16 +1,23 @@
 package io.github.test.controller;
 
+import io.github.panxiaochao.captcha.draw.ArithmeticCaptcha;
+import io.github.panxiaochao.captcha.draw.CharacterCaptcha;
 import io.github.panxiaochao.core.response.R;
 import io.github.panxiaochao.core.utils.StrUtil;
 import io.github.panxiaochao.core.utils.SystemServerUtil;
-import io.github.panxiaochao.core.utils.metrics.TomcatMetric;
 import io.github.panxiaochao.core.utils.sysinfo.ServerInfo;
+import io.github.panxiaochao.crypto.encrypt.AesBytesEncryptor;
+import io.github.panxiaochao.crypto.encrypt.BytesEncryptor;
+import io.github.panxiaochao.crypto.utils.Base64Util;
 import io.github.panxiaochao.operate.log.core.annotation.OperateLog;
 import io.github.panxiaochao.qrcode.utils.QRCodeUtil;
 import io.github.panxiaochao.ratelimiter.annotation.RateLimiter;
 import io.github.panxiaochao.redis.utils.RedissonUtil;
-import io.github.panxiaochao.sensitive.annotation.FSensitive;
-import io.github.panxiaochao.sensitive.enums.FSensitiveStrategy;
+import io.github.panxiaochao.sensitive.annotation.Sensitive;
+import io.github.panxiaochao.sensitive.annotation.Translate;
+import io.github.panxiaochao.sensitive.strategy.sensitive.SensitiveStrategy;
+import io.github.panxiaochao.sensitive.strategy.translate.TranslateStrategy;
+import io.github.test.handle.IdCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +28,6 @@ import lombok.ToString;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +39,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -61,6 +71,8 @@ public class TestController {
 
     private final RedissonConnectionFactory connectionFactory;
 
+    private final BytesEncryptor aes = new AesBytesEncryptor();
+
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc")
     @RateLimiter
@@ -84,7 +96,7 @@ public class TestController {
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc/{id}")
 //    @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
-    @Cacheable(cacheNames = "user", key = "#id")
+//     @Cacheable(cacheNames = "user", key = "#id")
     public User getUser(@PathVariable String id, @RequestParam(required = false) String username) {
         User user = new User();
         user.setId(id);
@@ -95,6 +107,7 @@ public class TestController {
         user.setAddress("北京市朝阳区某某四合院1203室");
         user.setEmail("17640125371@163.com");
         user.setBankCard("6226456952351452853");
+        user.setState("1");
         return user;
     }
 
@@ -114,7 +127,7 @@ public class TestController {
     @Operation(summary = "服务信息接口", description = "服务信息接口", method = "GET")
     @GetMapping("/get/server")
     public R<ServerInfo> serverInfo() {
-        return R.ok(SystemServerUtil.INSTANCE().getServerInfo());
+        return R.ok(SystemServerUtil.getServerInfo());
     }
 
     /**
@@ -166,11 +179,11 @@ public class TestController {
     /**
      * Redis 分页
      */
-    @GetMapping("/tomcat/metric")
-    public R<Map<String, Object>> tomcatMetric(String name) {
-        TomcatMetric tomcatMetric = new TomcatMetric();
-        return R.ok(tomcatMetric.getMetrics(name));
-    }
+    // @GetMapping("/tomcat/metric")
+    // public R<Map<String, Object>> tomcatMetric(String name) {
+    //     TomcatMetric tomcatMetric = new TomcatMetric();
+    //     return R.ok(tomcatMetric.getMetrics(name));
+    // }
 
     /**
      * 获取二维码
@@ -183,6 +196,83 @@ public class TestController {
         // image content
         byte[] qrcodeBytes = QRCodeUtil.build(content).toBytes();
         return bodyBuilder.body(qrcodeBytes);
+    }
+
+    /**
+     * 加密
+     */
+    @GetMapping("/encrypt")
+    public R<String> encrypt() {
+        String content = "123456";
+        byte[] bytes = aes.encrypt(content.getBytes(StandardCharsets.UTF_8));
+        return R.ok(Base64Util.encodeToString(bytes));
+    }
+
+    /**
+     * 解密
+     */
+    @GetMapping("/decrypt")
+    public R<String> decrypt(String content) {
+        byte[] bytes = aes.decrypt(Base64Util.decodeFromString(content));
+        return R.ok(new String(bytes));
+    }
+
+    /**
+     * 字符串验证码
+     */
+    @GetMapping("/captcha")
+    public void captcha(int width, int height, int codeLength, HttpServletResponse response) {
+        CharacterCaptcha captcha = CharacterCaptcha.builder()
+                .codeLength(codeLength)
+                .width(width)
+                .height(height)
+                .interfereType(1)
+                .build();
+        try (ServletOutputStream out = response.getOutputStream()) {
+            // 禁止服务器缓存
+            response.setDateHeader("Expires", 0);
+            // 设置标准的 HTTP/1.1 no-cache headers.
+            response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+            // 设置IE扩展 HTTP/1.1 no-cache headers (use addHeader).
+            response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+            // 设置标准 HTTP/1.0 不缓存图片
+            response.setHeader("Pragma", "no-cache");
+            // 返回一个 jpeg图片, 默认是text/html
+            response.setContentType(captcha.getContentType());
+            captcha.writeTo(out);
+            out.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 算术验证码
+     */
+    @GetMapping("/arithmetic_captcha")
+    public void arithmeticCaptcha(int width, int height, int numLength, HttpServletResponse response) {
+        ArithmeticCaptcha captcha = ArithmeticCaptcha.builder()
+                .numLength(numLength)
+                .width(width)
+                .height(height)
+                .build();
+        System.out.println(captcha.getCaptchaCode());
+        try (ServletOutputStream out = response.getOutputStream()) {
+            // 禁止服务器缓存
+            response.setDateHeader("Expires", 0);
+            // 设置标准的 HTTP/1.1 no-cache headers.
+            response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+            // 设置IE扩展 HTTP/1.1 no-cache headers (use addHeader).
+            response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+            // 设置标准 HTTP/1.0 不缓存图片
+            response.setHeader("Pragma", "no-cache");
+            // 返回一个 jpeg图片, 默认是text/html
+            response.setContentType(captcha.getContentType());
+            captcha.writeTo(out);
+            out.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Getter
@@ -200,35 +290,36 @@ public class TestController {
         /**
          * 身份证
          */
-        @FSensitive(strategy = FSensitiveStrategy.ID_CARD)
+        // @Sensitive(strategy = SensitiveStrategy.ID_CARD)
+        @Sensitive(handler = IdCard.class)
         @Schema(description = "身份证")
         private String idCard;
 
         /**
          * 电话
          */
-        @FSensitive(strategy = FSensitiveStrategy.PHONE)
+        @Sensitive(strategy = SensitiveStrategy.PHONE)
         @Schema(description = "电话")
         private String phone;
 
         /**
          * 地址
          */
-        @FSensitive(strategy = FSensitiveStrategy.ADDRESS)
+        @Sensitive(strategy = SensitiveStrategy.ADDRESS)
         @Schema(description = "地址")
         private String address;
 
         /**
          * 邮箱
          */
-        @FSensitive(strategy = FSensitiveStrategy.EMAIL)
+        @Sensitive(strategy = SensitiveStrategy.EMAIL)
         @Schema(description = "邮箱")
         private String email;
 
         /**
          * 银行卡
          */
-        @FSensitive(strategy = FSensitiveStrategy.BANK_CARD)
+        @Sensitive(strategy = SensitiveStrategy.BANK_CARD)
         @Schema(description = "银行卡")
         private String bankCard;
 
@@ -270,5 +361,8 @@ public class TestController {
 
         @Schema(description = "LocalDateTime时间")
         private LocalDateTime createDateTime;
+
+        @Translate(strategy = TranslateStrategy.BOOLEAN)
+        private String state;
     }
 }

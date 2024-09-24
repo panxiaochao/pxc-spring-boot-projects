@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
  * @author Lypxc
  * @since 2024-02-07
  */
-@Tag(name = "", description = "Api")
+@Tag(name = "", description = "goods")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/goods/v1/goods")
@@ -38,6 +38,11 @@ public class GoodsApi {
     public R<Void> initGoodsRedis() {
         goodsServiceDao.initGoodsRedis();
         return R.ok();
+    }
+
+    @GetMapping("/one")
+    public R<Goods> one(int activityId) {
+        return R.ok(goodsServiceDao.one(activityId));
     }
 
     @GetMapping("/drawsByRedis")

@@ -1,14 +1,15 @@
 package io.github.test.handle;
 
-import io.github.panxiaochao.sensitive.strategy.AbstractFSensitiveStrategy;
+
+import io.github.panxiaochao.sensitive.strategy.IHandler;
 
 /**
- * <p></p>
+ * <p>自定义身份证策略</p>
  *
  * @author Lypxc
  * @since 2023-08-31
  */
-public class IdCard extends AbstractFSensitiveStrategy {
+public class IdCard implements IHandler {
     @Override
     public String handler(String jsonValue) {
         return jsonValue + "adasdasdsadasdasdasdasd";
