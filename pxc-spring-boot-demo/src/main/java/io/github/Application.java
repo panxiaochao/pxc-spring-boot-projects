@@ -1,5 +1,6 @@
 package io.github;
 
+import io.github.panxiaochao.core.enums.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -38,10 +39,11 @@ public class Application {
         if (!StringUtils.hasText(path) || "/".equals(path)) {
             path = "";
         }
-
-        LOG.info("\n----------------------------------------------------------\n\t{}{}{}{}",
-                applicationName + " is running! Access URLs:", "\n\tLocal    访问网址: \thttp://localhost:" + port + path,
-                "\n\tExternal 访问网址: \thttp://" + ip + ":" + port + path,
+        LOG.info("\n----------------------------------------------------------\n\t{}{}{}{}{}",
+                String.join("", applicationName, " is running! Access URLs:"),
+                String.join("", "\n\tLocal    访问网址: \t", Protocol.HTTP.getFormat(), "localhost:", port, path),
+                String.join("", "\n\tExternal 访问网址: \t", Protocol.HTTP.getFormat(), ip, ":", port, path),
+                String.join("", "\n\tDoc      访问网址: \t", Protocol.HTTP.getFormat(), ip, ":" + port, path, "/doc.html"),
                 "\n----------------------------------------------------------\n");
     }
 

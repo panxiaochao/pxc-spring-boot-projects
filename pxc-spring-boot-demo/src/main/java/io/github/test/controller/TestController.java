@@ -21,6 +21,8 @@ import io.github.test.handle.IdCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -39,8 +41,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -79,7 +79,7 @@ public class TestController {
     @OperateLog(title = "测试模块", description = "无参接口")
     // @RepeatSubmitLimiter
     public R<User> getUser() {
-        User user = RedissonUtil.get("user");
+        User  user = RedissonUtil.get("user");
         if (Objects.isNull(user)) {
             user = new User();
             user.setUserName("潘骁超");

@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.panxiaochao</groupId>
         <artifactId>pxc-spring-boot-starter-parent</artifactId>
-        <version>2.0.7</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
@@ -31,84 +31,82 @@
         <!--            <artifactId>spring-boot-starter-undertow</artifactId>-->
         <!--        </dependency>-->
 
+        <!-- mybatis-plus 3.5.8版本注意点：升级 mybatis-spring 至 3.0.4 版本，升级 jsqlparser 至 5.0 版本 -->
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-mybatis-plus</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis-spring</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>3.0.4</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-redis</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-ratelimiter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-repeatsubmit</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-operate-log</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-trace-log</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-sensitive</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-qrcode</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-holiday</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-crypto</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
             <artifactId>pxc-framework-captcha</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.28</version>
+            <version>5.8.32</version>
         </dependency>
-
         <!-- 达梦数据库 Dm -->
         <dependency>
             <groupId>com.dameng</groupId>
             <artifactId>DmJdbcDriver18</artifactId>
             <version>8.1.3.140</version>
         </dependency>
-
         <!-- JustAuth OAuth2.0 -->
         <!--        <dependency>-->
         <!--            <groupId>me.zhyd.oauth</groupId>-->

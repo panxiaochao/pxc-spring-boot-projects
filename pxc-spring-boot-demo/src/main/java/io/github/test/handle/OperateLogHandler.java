@@ -3,8 +3,8 @@ package io.github.test.handle;
 import io.github.panxiaochao.operate.log.core.domain.OperateLogDomain;
 import io.github.panxiaochao.operate.log.core.handler.AbstractOperateLogHandler;
 import io.github.test.service.HandlerService;
+import jakarta.annotation.Resource;
 
-import javax.annotation.Resource;
 
 /**
  * {@code OperateLogHandler}
