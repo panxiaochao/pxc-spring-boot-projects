@@ -17,8 +17,6 @@ spring:
       log-type: other
     cache:
       cache-type: redis
-  #    redis:
-  #      key-prefix: pxc
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
@@ -30,10 +28,10 @@ spring:
     username: root
     password: root123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    driver-class-name: dm.jdbc.driver.DmDriver
-#    url: jdbc:dm://134.98.6.38:5237/SRT_CLOUD
-#    username: SRT_CLOUD
-#    password: SRT_CLOUD@2024
+    #    driver-class-name: dm.jdbc.driver.DmDriver
+    #    url: jdbc:dm://134.98.6.38:5237/SRT_CLOUD
+    #    username: SRT_CLOUD
+    #    password: SRT_CLOUD@2024
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 10
@@ -49,7 +47,7 @@ spring:
 
 # mybatis-plus 配置
 mybatis-plus:
-  db-type: dm
+  db-type: mysql
   global-config:
     banner: false
   configuration:
