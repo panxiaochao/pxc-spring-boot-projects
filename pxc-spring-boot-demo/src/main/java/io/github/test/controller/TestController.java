@@ -95,7 +95,7 @@ public class TestController {
 
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc/{id}")
-//    @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
+   @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
 //     @Cacheable(cacheNames = "user", key = "#id")
     public User getUser(@PathVariable String id, @RequestParam(required = false) String username) {
         User user = new User();
