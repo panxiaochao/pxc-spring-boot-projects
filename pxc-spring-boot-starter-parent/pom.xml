@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.3.4</version>
+        <version>3.5.4</version>
     </parent>
 
     <groupId>io.github.panxiaochao</groupId>
@@ -14,7 +14,7 @@
     <version>3.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
-    <description>Parent pom from spring-boot-dependencies 2.7 latest</description>
+    <description>Parent pom from spring-boot-dependencies 3.X latest</description>
     <url>https://github.com/panxiaochao/pxc-spring-boot-starter-parent</url>
 
     <!-- licenses -->
@@ -64,8 +64,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- base properties -->
-        <spring-boot.version>3.4.2</spring-boot.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <spring-boot.version>3.5.4</spring-boot.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <pxc-framework.version>3.0.0-SNAPSHOT</pxc-framework.version>
     </properties>
 
@@ -165,7 +165,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.2.7</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
