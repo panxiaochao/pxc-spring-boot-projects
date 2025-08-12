@@ -3,6 +3,7 @@ package io.github.test.controller;
 import io.github.panxiaochao.captcha.draw.ArithmeticCaptcha;
 import io.github.panxiaochao.captcha.draw.CharacterCaptcha;
 import io.github.panxiaochao.core.response.R;
+import io.github.panxiaochao.core.utils.SpringContextUtil;
 import io.github.panxiaochao.core.utils.StrUtil;
 import io.github.panxiaochao.core.utils.SystemServerUtil;
 import io.github.panxiaochao.core.utils.sysinfo.ServerInfo;
@@ -21,6 +22,7 @@ import io.github.test.handle.IdCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -28,32 +30,25 @@ import lombok.ToString;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.NameValueExpression;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>测试Api</p>
@@ -72,6 +67,8 @@ public class TestController {
     private final RedissonConnectionFactory connectionFactory;
 
     private final BytesEncryptor aes = new AesBytesEncryptor();
+
+    private static final String BASE_PACKAGE = "io.github";
 
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc")
@@ -95,7 +92,7 @@ public class TestController {
 
     @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
     @GetMapping("/get/pxc/{id}")
-   @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
+    @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
 //     @Cacheable(cacheNames = "user", key = "#id")
     public User getUser(@PathVariable String id, @RequestParam(required = false) String username) {
         User user = new User();
@@ -275,6 +272,16 @@ public class TestController {
         }
     }
 
+    @PutMapping("/put")
+    public void put() {
+
+    }
+
+    @DeleteMapping("/delete")
+    public void delete() {
+
+    }
+
     @Getter
     @Setter
     @ToString
@@ -365,4 +372,94 @@ public class TestController {
         @Translate(strategy = TranslateStrategy.BOOLEAN)
         private String state;
     }
+
+    @GetMapping("/getAllUrl")
+    @ResponseBody
+    public List<UrlMappingDetail> getAllUrl(HttpServletRequest request) {
+        ApplicationContext applicationContext = SpringContextUtil.getApplicationContext();
+        RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
+        // 获取url与类和方法的对应信息
+        Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping.getHandlerMethods();
+
+        List<UrlMappingDetail> mappingDetails = new ArrayList<>();
+
+        for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : map.entrySet()) {
+            // K-V  映射关系
+            RequestMappingInfo info = entry.getKey();
+            HandlerMethod handlerMethod = entry.getValue();
+
+            // 过滤非项目自定义的控制器
+            if (!handlerMethod.getBeanType().getName().startsWith(BASE_PACKAGE)) {
+                continue;
+            }
+
+            UrlMappingDetail detail = new UrlMappingDetail();
+            // detail.setId(SnowFlakeUtil.INSTANCE().nextIdStr());
+
+            // URL Patterns
+            detail.setUrlPatterns(info.getPatternValues());
+
+            // HTTP Methods
+            detail.setHttpMethods(info.getMethodsCondition() != null
+                    ? info.getMethodsCondition().getMethods()
+                    : Collections.emptySet());
+
+            // Parameters
+            detail.setParameters(info.getParamsCondition() != null
+                    ? info.getParamsCondition().getExpressions()
+                    : Collections.emptySet());
+
+            // Headers
+            detail.setHeaders(info.getHeadersCondition() != null
+                    ? info.getHeadersCondition().getExpressions()
+                    : Collections.emptySet());
+
+            // Consumes
+            detail.setConsumes(info.getConsumesCondition() != null
+                    ? info.getConsumesCondition().getConsumableMediaTypes()
+                    : Collections.emptySet());
+
+            // Produces
+            detail.setProduces(info.getProducesCondition() != null
+                    ? info.getProducesCondition().getProducibleMediaTypes()
+                    : Collections.emptySet());
+
+            // Controller Class
+            detail.setControllerClass(handlerMethod.getBeanType().getName());
+
+            // Method Name
+            detail.setMethodName(handlerMethod.getMethod().getName());
+
+            //  Full Method
+            detail.setFullMethod(handlerMethod.getBeanType().getName() + "." + handlerMethod.getMethod().getName() + "()");
+
+            // 是否为 REST 控制器
+            detail.setRest(handlerMethod.getBeanType().isAnnotationPresent(RestController.class));
+
+            mappingDetails.add(detail);
+        }
+        // 按URL排序
+        mappingDetails.sort(Comparator.comparing(m -> {
+            Set<String> patterns = m.getUrlPatterns();
+            return patterns.isEmpty() ? "" : patterns.iterator().next();
+        }));
+        System.out.println("数量：" + mappingDetails.size());
+        return mappingDetails;
+    }
+
+    @Data
+    public static class UrlMappingDetail {
+        private String id;
+        private Set<String> urlPatterns;
+        private Set<RequestMethod> httpMethods;
+        private Set<NameValueExpression<String>> parameters;
+        private Set<NameValueExpression<String>> headers;
+        private Set<MediaType> consumes;
+        private Set<MediaType> produces;
+        private boolean isRest;
+        private String controllerClass;
+        private String methodName;
+        private String fullMethod;
+    }
+
 }

@@ -14,7 +14,7 @@ spring:
     async: true
     operatelog:
       handler: io.github.test.handle.OperateLogHandler
-      log-type: other
+      log-type: custom
     cache:
       cache-type: redis
   main:
