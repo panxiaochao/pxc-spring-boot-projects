@@ -81,6 +81,10 @@
             <artifactId>pxc-framework-captcha</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.github.panxiaochao</groupId>
+            <artifactId>pxc-framework-ip2region</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -102,6 +106,13 @@
         <!--            <artifactId>JustAuth</artifactId>-->
         <!--            <version>1.16.6</version>-->
         <!--        </dependency>-->
+
+        <!-- 钉钉 SDK -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>dingtalk</artifactId>
+            <version>2.2.33</version>
+        </dependency>
 
     </dependencies>
 </project>

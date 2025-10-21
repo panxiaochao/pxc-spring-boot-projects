@@ -20,6 +20,8 @@ spring:
       log-type: custom
     cache:
       cache-type: redis
+    ip2region:
+      v6db-location: classpath:ip2region/v6/ip2region_v6.xdb
   #    redis:
   #      key-prefix: pxc
   main:
