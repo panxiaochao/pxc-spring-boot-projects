@@ -1,7 +1,7 @@
 package io.github.test.handle;
 
 
-import io.github.panxiaochao.sensitive.strategy.IHandler;
+import io.github.panxiaochao.boot3.sensitive.strategy.IHandler;
 
 /**
  * <p>自定义身份证策略</p>

@@ -1,6 +1,6 @@
 package io.github.test.listener;
 
-import io.github.panxiaochao.redis.utils.RedissonUtil;
+import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.Ordered;

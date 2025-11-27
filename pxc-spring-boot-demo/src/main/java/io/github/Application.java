@@ -1,6 +1,6 @@
 package io.github;
 
-import io.github.panxiaochao.core.enums.Protocol;
+import io.github.panxiaochao.boot3.core.enums.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,10 @@ import org.springframework.util.StringUtils;
 import java.net.InetAddress;
 
 /**
- * <p>Multiple Spring Data modules found, entering strict repository configuration mode. exclude RedisRepositoriesAutoConfiguration.class</p>
+ * <p>
+ * Multiple Spring Data modules found, entering strict repository configuration mode.
+ * exclude RedisRepositoriesAutoConfiguration.class
+ * </p>
  *
  * @author Lypxc
  */
@@ -23,28 +26,28 @@ import java.net.InetAddress;
 @EnableCaching
 public class Application {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    /**
-     * @param args args
-     * @throws Exception Exception
-     */
-    public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext application = SpringApplication.run(Application.class, args);
-        Environment env = application.getEnvironment();
-        String ip = InetAddress.getLocalHost().getHostAddress();
-        String applicationName = env.getProperty("spring.application.name");
-        String port = env.getProperty("server.port");
-        String path = env.getProperty("server.servlet.context-path");
-        if (!StringUtils.hasText(path) || "/".equals(path)) {
-            path = "";
-        }
-        LOG.info("\n----------------------------------------------------------\n\t{}{}{}{}{}",
-                String.join("", applicationName, " is running! Access URLs:"),
-                String.join("", "\n\tLocal    访问网址: \t", Protocol.HTTP.getFormat(), "localhost:", port, path),
-                String.join("", "\n\tExternal 访问网址: \t", Protocol.HTTP.getFormat(), ip, ":", port, path),
-                String.join("", "\n\tDoc      访问网址: \t", Protocol.HTTP.getFormat(), ip, ":" + port, path, "/doc.html"),
-                "\n----------------------------------------------------------\n");
-    }
+	/**
+	 * @param args args
+	 * @throws Exception Exception
+	 */
+	public static void main(String[] args) throws Exception {
+		ConfigurableApplicationContext application = SpringApplication.run(Application.class, args);
+		Environment env = application.getEnvironment();
+		String ip = InetAddress.getLocalHost().getHostAddress();
+		String applicationName = env.getProperty("spring.application.name");
+		String port = env.getProperty("server.port");
+		String path = env.getProperty("server.servlet.context-path");
+		if (!StringUtils.hasText(path) || "/".equals(path)) {
+			path = "";
+		}
+		LOG.info("\n----------------------------------------------------------\n\t{}{}{}{}{}",
+				String.join("", applicationName, " is running! Access URLs:"),
+				String.join("", "\n\tLocal    访问网址: \t", Protocol.HTTP.getFormat(), "localhost:", port, path),
+				String.join("", "\n\tExternal 访问网址: \t", Protocol.HTTP.getFormat(), ip, ":", port, path),
+				String.join("", "\n\tDoc      访问网址: \t", Protocol.HTTP.getFormat(), ip, ":" + port, path, "/doc.html"),
+				"\n----------------------------------------------------------\n");
+	}
 
 }

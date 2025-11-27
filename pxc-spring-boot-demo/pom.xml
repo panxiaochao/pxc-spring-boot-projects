@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.panxiaochao</groupId>
-        <artifactId>pxc-spring-boot-starter-parent</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <artifactId>pxc-spring-boot3-starter-parent</artifactId>
+        <version>3.0.0</version>
         <relativePath/>
     </parent>
 
@@ -16,25 +16,13 @@
     <dependencies>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-web</artifactId>
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--                    <groupId>org.springframework.boot</groupId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
+            <artifactId>pxc-framework-boot3-web</artifactId>
         </dependency>
-
-        <!-- 添加 Undertow 容器 -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-undertow</artifactId>-->
-        <!--        </dependency>-->
 
         <!-- mybatis-plus 3.5.8版本注意点：升级 mybatis-spring 至 3.0.4 版本，升级 jsqlparser 至 5.0 版本 -->
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-mybatis-plus</artifactId>
+            <artifactId>pxc-framework-boot3-mybatis-plus</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
@@ -42,47 +30,43 @@
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-redis</artifactId>
+            <artifactId>pxc-framework-boot3-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-ratelimiter</artifactId>
+            <artifactId>pxc-framework-boot3-ratelimiter</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-repeatsubmit</artifactId>
+            <artifactId>pxc-framework-boot3-repeatsubmit</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-operate-log</artifactId>
+            <artifactId>pxc-framework-boot3-operate-log</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-trace-log</artifactId>
+            <artifactId>pxc-framework-boot3-trace-log</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-sensitive</artifactId>
+            <artifactId>pxc-framework-boot3-sensitive</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-qrcode</artifactId>
+            <artifactId>pxc-framework-boot3-holiday</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-holiday</artifactId>
+            <artifactId>pxc-framework-boot3-crypto</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-crypto</artifactId>
+            <artifactId>pxc-framework-boot3-captcha</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-captcha</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-ip2region</artifactId>
+            <artifactId>pxc-framework-boot3-ip2region</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -112,6 +96,12 @@
             <groupId>com.aliyun</groupId>
             <artifactId>dingtalk</artifactId>
             <version>2.2.33</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.14</version>
         </dependency>
 
     </dependencies>

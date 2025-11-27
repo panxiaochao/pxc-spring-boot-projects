@@ -2,8 +2,8 @@ package io.github.goods.controller;
 
 import io.github.goods.dao.GoodsServiceDao;
 import io.github.goods.po.Goods;
-import io.github.panxiaochao.core.response.R;
-import io.github.panxiaochao.core.utils.JacksonUtil;
+import io.github.panxiaochao.boot3.core.response.R;
+import io.github.panxiaochao.boot3.core.utils.JacksonUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RedissonClient;

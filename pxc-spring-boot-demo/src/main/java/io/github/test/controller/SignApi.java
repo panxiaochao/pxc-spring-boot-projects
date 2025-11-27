@@ -1,8 +1,8 @@
 package io.github.test.controller;
 
-import io.github.panxiaochao.core.response.R;
-import io.github.panxiaochao.core.utils.date.LocalDateTimeUtil;
-import io.github.panxiaochao.redis.utils.RedissonUtil;
+import io.github.panxiaochao.boot3.core.response.R;
+import io.github.panxiaochao.boot3.core.utils.date.LocalDateTimeUtil;
+import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

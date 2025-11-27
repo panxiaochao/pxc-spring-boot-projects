@@ -13,7 +13,7 @@ spring:
     virtual:
       enabled: true
   # pxc-framework 属性
-  pxc-framework:
+  pxc-framework-boot3:
     async: true
     operatelog:
       handler: io.github.test.handle.OperateLogHandler
