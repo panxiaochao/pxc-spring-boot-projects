@@ -1,6 +1,6 @@
 package io.github.test.controller;
 
-import io.github.panxiaochao.boot3.core.response.R;
+import io.github.panxiaochao.boot3.common.response.R;
 import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
 package io.github;
 
-import io.github.panxiaochao.boot3.core.enums.Protocol;
+import io.github.panxiaochao.boot3.common.constants.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
