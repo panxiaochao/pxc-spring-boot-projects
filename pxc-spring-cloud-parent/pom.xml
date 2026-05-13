@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-cloud-parent</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>pxc-spring-cloud-parent dependencies</description>
@@ -56,10 +56,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 2025.0.X 版本支持 3.5.X -->
-        <spring-boot.version>3.5.11</spring-boot.version>
-        <spring-cloud.version>2025.0.1</spring-cloud.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
+        <spring-cloud.version>2025.0.2</spring-cloud.version>
         <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
-        <caffeine.version>3.2.3</caffeine.version>
+        <caffeine.version>3.2.4</caffeine.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-fileupload.version>1.6.0</commons-fileupload.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>

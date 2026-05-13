@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.panxiaochao</groupId>
         <artifactId>pxc-spring-boot3-starter-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.2-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.43</version>
+            <version>5.8.44</version>
         </dependency>
         <!-- 达梦数据库 Dm -->
         <dependency>

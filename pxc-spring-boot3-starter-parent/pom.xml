@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.5.11</version>
+        <version>3.5.14</version>
     </parent>
 
     <groupId>io.github.panxiaochao</groupId>
     <artifactId>pxc-spring-boot3-starter-parent</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Parent pom from spring-boot-dependencies 3.X latest</description>
@@ -64,11 +64,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- base properties -->
-        <spring-boot.version>3.5.11</spring-boot.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-fileupload.version>1.6.0</commons-fileupload.version>
-        <pxc-framework-boot3.version>3.0.1</pxc-framework-boot3.version>
+        <pxc-framework-boot3.version>3.0.2-SNAPSHOT</pxc-framework-boot3.version>
     </properties>
 
     <!-- custom dependencyManagement spring boot import -->
