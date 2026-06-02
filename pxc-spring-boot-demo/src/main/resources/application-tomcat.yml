@@ -13,15 +13,15 @@ spring:
     virtual:
       enabled: true
   # pxc-framework 属性
-  pxc-framework-boot3:
-    async: true
-    operatelog:
-      handler: io.github.test.handle.OperateLogHandler
-      log-type: custom
-    cache:
-      cache-type: redis
-    ip2region:
-      v6db-location: classpath:ip2region/v6/ip2region_v6.xdb
+#  pxc-framework-boot3:
+#    async: true
+#    operatelog:
+#      handler: io.github.test.handle.OperateLogHandler
+#      log-type: custom
+#    cache:
+#      cache-type: redis
+#    ip2region:
+#      v6db-location: classpath:ip2region/v6/ip2region_v6.xdb
   #    redis:
   #      key-prefix: pxc
   main:
@@ -30,35 +30,35 @@ spring:
   application:
     name: springboot-demo
   # 数据库
-  datasource:
-    url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    #    driver-class-name: dm.jdbc.driver.DmDriver
-    #    url: jdbc:dm://134.98.6.38:5237/SRT_CLOUD
-    #    username: SRT_CLOUD
-    #    password: SRT_CLOUD@2024
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      minimum-idle: 5
-      maximum-pool-size: 10
-      idle-timeout: 60000
-      max-lifetime: 60000
-      connection-timeout: 30000
-      pool-name: pxc-system-pool
-  data:
-    redis:
-      port: 6379
-      database: 0
-      host: 127.0.0.1
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    #    driver-class-name: dm.jdbc.driver.DmDriver
+#    #    url: jdbc:dm://134.98.6.38:5237/SRT_CLOUD
+#    #    username: SRT_CLOUD
+#    #    password: SRT_CLOUD@2024
+#    type: com.zaxxer.hikari.HikariDataSource
+#    hikari:
+#      minimum-idle: 5
+#      maximum-pool-size: 10
+#      idle-timeout: 60000
+#      max-lifetime: 60000
+#      connection-timeout: 30000
+#      pool-name: pxc-system-pool
+#  data:
+#    redis:
+#      port: 6379
+#      database: 0
+#      host: 127.0.0.1
 
 # mybatis-plus 配置
-mybatis-plus:
-  db-type: mysql
-  global-config:
-    banner: false
-  configuration:
-    map-underscore-to-camel-case: true
-    # 开发测试时使用
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis-plus:
+#  db-type: mysql
+#  global-config:
+#    banner: false
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    # 开发测试时使用
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.panxiaochao</groupId>
-        <artifactId>pxc-spring-boot3-starter-parent</artifactId>
-        <version>3.0.2-SNAPSHOT</version>
+        <artifactId>pxc-spring-boot4-starter-parent</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
@@ -16,57 +16,15 @@
     <dependencies>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-web</artifactId>
-        </dependency>
-
-        <!-- mybatis-plus 3.5.8版本注意点：升级 mybatis-spring 至 3.0.4 版本，升级 jsqlparser 至 5.0 版本 -->
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-mybatis-plus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <artifactId>pxc-framework-boot4-web</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-redis</artifactId>
+            <artifactId>pxc-framework-boot4-holiday</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-ratelimiter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-repeatsubmit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-operate-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-trace-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-sensitive</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-holiday</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-crypto</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-captcha</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.panxiaochao</groupId>
-            <artifactId>pxc-framework-boot3-ip2region</artifactId>
+            <artifactId>pxc-framework-boot4-crypto</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -76,7 +34,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.44</version>
+            <version>5.8.46</version>
         </dependency>
         <!-- 达梦数据库 Dm -->
         <dependency>
@@ -84,25 +42,10 @@
             <artifactId>DmJdbcDriver18</artifactId>
             <version>8.1.3.140</version>
         </dependency>
-        <!-- JustAuth OAuth2.0 -->
-        <!--        <dependency>-->
-        <!--            <groupId>me.zhyd.oauth</groupId>-->
-        <!--            <artifactId>JustAuth</artifactId>-->
-        <!--            <version>1.16.6</version>-->
-        <!--        </dependency>-->
-
-        <!-- 钉钉 SDK -->
-        <dependency>
-            <groupId>com.aliyun</groupId>
-            <artifactId>dingtalk</artifactId>
-            <version>2.2.33</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.8.15</version>
+            <version>3.0.3</version>
         </dependency>
-
     </dependencies>
 </project>

@@ -1,14 +1,12 @@
 package io.github;
 
-import io.github.panxiaochao.boot3.common.constants.Protocol;
+import io.github.panxiaochao.boot4.common.constants.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
 import java.net.InetAddress;
@@ -22,8 +20,7 @@ import java.net.InetAddress;
  * @author Lypxc
  */
 @SpringBootApplication
-@EnableTransactionManagement
-@EnableCaching
+// @EnableCaching
 public class Application {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Application.class);

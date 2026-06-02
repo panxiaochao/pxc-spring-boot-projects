@@ -1,7 +1,7 @@
 package io.github.test.controller;
 
-import io.github.panxiaochao.boot3.common.response.R;
-import io.github.panxiaochao.boot3.holiday.core.HolidayClient;
+import io.github.panxiaochao.boot4.common.response.R;
+import io.github.panxiaochao.boot4.holiday.core.HolidayClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

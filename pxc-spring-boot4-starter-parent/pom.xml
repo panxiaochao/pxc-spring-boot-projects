@@ -6,15 +6,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.5.14</version>
+        <version>4.0.6</version>
     </parent>
 
     <groupId>io.github.panxiaochao</groupId>
-    <artifactId>pxc-spring-boot3-starter-parent</artifactId>
-    <version>3.0.2-SNAPSHOT</version>
+    <artifactId>pxc-spring-boot4-starter-parent</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
-    <description>Parent pom from spring-boot-dependencies 3.X latest</description>
+    <description>Parent pom from spring-boot-dependencies 4.X latest</description>
     <url>https://github.com/panxiaochao/pxc-spring-boot-starter-parent</url>
 
     <!-- licenses -->
@@ -57,18 +57,21 @@
 
     <!-- properties -->
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <resource.delimiter>@</resource.delimiter>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- base properties -->
-        <spring-boot.version>3.5.14</spring-boot.version>
-        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <spring-boot.version>4.0.6</spring-boot.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-fileupload.version>1.6.0</commons-fileupload.version>
-        <pxc-framework-boot3.version>3.0.2-SNAPSHOT</pxc-framework-boot3.version>
+        <pxc-framework-boot4.version>4.0.0-SNAPSHOT</pxc-framework-boot4.version>
+
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
     </properties>
 
     <!-- custom dependencyManagement spring boot import -->
@@ -76,8 +79,8 @@
         <dependencies>
             <dependency>
                 <groupId>io.github.panxiaochao</groupId>
-                <artifactId>pxc-framework-boot3-bom</artifactId>
-                <version>${pxc-framework-boot3.version}</version>
+                <artifactId>pxc-framework-boot4-bom</artifactId>
+                <version>${pxc-framework-boot4.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -167,7 +170,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.8</version>
+                        <version>${maven-gpg-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -182,7 +185,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.10.0</version>
+                        <version>${central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
