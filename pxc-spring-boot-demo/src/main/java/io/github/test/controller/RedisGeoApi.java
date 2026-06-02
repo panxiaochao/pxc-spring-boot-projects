@@ -5,7 +5,7 @@ import io.github.panxiaochao.boot3.redis.utils.RedissonUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.redisson.api.GeoUnit;
+import org.redisson.api.geo.GeoUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;

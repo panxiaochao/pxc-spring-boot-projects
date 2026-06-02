@@ -21,8 +21,8 @@ public class HolidayController {
 
     private final HolidayClient holidayClient;
 
-    @GetMapping("")
-    public R<Boolean> getUser() {
+    @GetMapping
+    public R<Boolean> isHoliday() {
         return R.ok(holidayClient.isHoliday("2024-04-03"));
     }
 }

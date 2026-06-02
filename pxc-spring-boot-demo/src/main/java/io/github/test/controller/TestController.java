@@ -91,6 +91,7 @@ public class TestController {
 			user.setUserName("潘骁超");
 			user.setCreateDate(new Date());
 			user.setCreateDateTime(LocalDateTime.now());
+			user.setState("1");
 			RedissonUtil.set("user", user, Duration.ofSeconds(60));
 		}
 		else {
