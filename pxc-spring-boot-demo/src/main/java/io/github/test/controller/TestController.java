@@ -8,7 +8,10 @@ import io.github.panxiaochao.boot4.utils.QRCodeUtil;
 import io.github.panxiaochao.boot4.utils.SystemServerUtil;
 import io.github.panxiaochao.boot4.utils.sysinfo.ServerInfo;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -109,6 +112,7 @@ public class TestController {
 	 * 服务信息接口
 	 */
 	@Operation(summary = "服务信息接口", description = "服务信息接口", method = "GET")
+	@ApiResponses(value = { @ApiResponse(content = @Content(schema = @Schema(implementation = ServerInfo.class))) })
 	@GetMapping("/get/server")
 	public R<ServerInfo> serverInfo() {
 		return R.ok(SystemServerUtil.getServerInfo());
@@ -275,7 +279,7 @@ public class TestController {
 	@Schema(name = "用户信息", description = "用户信息描述")
 	public static class User {
 
-		@Schema(description = "ID")
+		@Schema(description = "ID", examples = "123")
 		private String id;
 
 		@Schema(description = "用户名")
@@ -357,7 +361,12 @@ public class TestController {
 		private LocalDateTime createDateTime;
 
 		// @Translate(strategy = TranslateStrategy.BOOLEAN)
+
+		@Schema(description = "状态")
 		private String state;
+
+		@Schema(description = "是否删除")
+		private boolean isDelete;
 
 	}
 
