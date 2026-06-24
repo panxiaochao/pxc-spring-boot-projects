@@ -31,9 +31,9 @@ spring:
     name: springboot-demo
   # 数据库
   datasource:
-    url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3308/test?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: root
-    password: 123456
+    password: root123
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    driver-class-name: dm.jdbc.driver.DmDriver
     #    url: jdbc:dm://134.98.6.38:5237/SRT_CLOUD

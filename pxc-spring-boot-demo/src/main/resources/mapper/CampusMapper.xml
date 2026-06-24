@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.sync.mapper.CampusMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="io.github.sync.po.Campus">
+        <id column="id" property="id"/>
+        <result column="org_id" property="orgId"/>
+        <result column="xqdm" property="xqdm"/>
+        <result column="xqmc" property="xqmc"/>
+        <result column="xqm" property="xqm"/>
+        <result column="xqzt" property="xqzt"/>
+        <result column="sfxnxq" property="sfxnxq"/>
+        <result column="sfzxqm" property="sfzxqm"/>
+        <result column="xxdm" property="xxdm"/>
+        <result column="xxmc" property="xxmc"/>
+        <result column="szzqzxs" property="szzqzxs"/>
+        <result column="dsz" property="dsz"/>
+        <result column="qqq" property="qqq"/>
+        <result column="xz" property="xz"/>
+        <result column="sq" property="sq"/>
+        <result column="x" property="x"/>
+        <result column="y" property="y"/>
+        <result column="xqdz" property="xqdz"/>
+        <result column="jxny" property="jxny"/>
+        <result column="ghgm_bj" property="ghgmBj"/>
+        <result column="xzqhm" property="xzqhm"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, org_id, xqdm, xqmc, xqm, xqzt, sfxnxq, sfzxqm, xxdm, xxmc, szzqzxs, dsz, qqq, xz, sq, x, y, xqdz, jxny, ghgm_bj, xzqhm, create_time, update_time
+    </sql>
+
+</mapper>
