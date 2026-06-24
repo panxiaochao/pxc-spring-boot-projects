@@ -13,17 +13,16 @@ spring:
     virtual:
       enabled: true
   # pxc-framework 属性
-#  pxc-framework-boot3:
+  pxc-framework-boot4:
 #    async: true
 #    operatelog:
 #      handler: io.github.test.handle.OperateLogHandler
 #      log-type: custom
 #    cache:
 #      cache-type: redis
-#    ip2region:
-#      v6db-location: classpath:ip2region/v6/ip2region_v6.xdb
-  #    redis:
-  #      key-prefix: pxc
+    redisson:
+      key-prefix: pxc
+      class-codec-enable: true
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
@@ -47,11 +46,11 @@ spring:
 #      max-lifetime: 60000
 #      connection-timeout: 30000
 #      pool-name: pxc-system-pool
-#  data:
-#    redis:
-#      port: 6379
-#      database: 0
-#      host: 127.0.0.1
+  data:
+    redis:
+      port: 6379
+      database: 0
+      host: 127.0.0.1
 
 # mybatis-plus 配置
 #mybatis-plus:

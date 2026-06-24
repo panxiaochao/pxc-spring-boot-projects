@@ -4,7 +4,9 @@ import io.github.panxiaochao.boot4.common.response.R;
 import io.github.panxiaochao.boot4.crypto.encrypt.AesBytesEncryptor;
 import io.github.panxiaochao.boot4.crypto.encrypt.BytesEncryptor;
 import io.github.panxiaochao.boot4.crypto.utils.Base64Util;
+import io.github.panxiaochao.boot4.redis.utils.RedissonUtil;
 import io.github.panxiaochao.boot4.utils.QRCodeUtil;
+import io.github.panxiaochao.boot4.utils.StrUtil;
 import io.github.panxiaochao.boot4.utils.SystemServerUtil;
 import io.github.panxiaochao.boot4.utils.sysinfo.ServerInfo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,8 +19,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +35,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
 
 /**
  * <p>
@@ -52,35 +61,62 @@ public class TestController {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
-	// private final RedissonConnectionFactory connectionFactory;
+	private final RedissonConnectionFactory connectionFactory;
 
 	private final BytesEncryptor aes = new AesBytesEncryptor();
 
 	// private final Ip2regionClient ip2regionClient;
 
-	// @Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
-	// @GetMapping("/get/pxc")
-	// // @RateLimiter
-	// // @OperateLog(title = "测试模块", description = "无参接口")
-	// // @RepeatSubmitLimiter
-	// public R<User> getUser() {
-	// User user = RedissonUtil.get("user");
-	// if (Objects.isNull(user)) {
-	// user = new User();
-	// user.setUserName("潘骁超");
-	// user.setCreateDate(new Date());
-	// user.setCreateDateTime(LocalDateTime.now());
-	// user.setState("1");
-	// RedissonUtil.set("user", user, Duration.ofSeconds(60));
-	// }
-	// else {
-	// LOGGER.info("user get from Redis !");
-	// }
-	// // int a = 1 / 0;
-	// return R.ok(user);
-	// }
+	@Operation(summary = "无参接口1-class-codec-true", description = "无参接口描述", method = "GET")
+	@GetMapping("/get/pxc")
+	// @RateLimiter
+	// @OperateLog(title = "测试模块", description = "无参接口")
+	// @RepeatSubmitLimiter
+	public R<User> getUser() {
+		User user = RedissonUtil.get("user");
+		// User user;
+		if (Objects.isNull(user)) {
+			user = new User();
+			user.setUserName("潘骁超");
+			user.setCreateDate(new Date());
+			user.setCreateDateTime(LocalDateTime.now());
+			user.setState("1");
+			Map<String, String> map = new HashMap<>();
+			map.put("key1", "value1");
+			map.put("key2", "value2");
+			user.setMap(map);
+			RedissonUtil.set("user", user, Duration.ofSeconds(60));
+		}
+		else {
+			// user = JacksonUtil.toBean(object, User.class);
+			LOGGER.info("user get from Redis !");
+		}
+		// int a = 1 / 0;
+		return R.ok(user);
+	}
 
-	@Operation(summary = "无参接口", description = "无参接口描述", method = "GET")
+	@Operation(summary = "无参接口1-class-codec-false", description = "无参接口描述", method = "GET")
+	@GetMapping("/get/pxc/no-class-codec")
+	// @RateLimiter
+	// @OperateLog(title = "测试模块", description = "无参接口")
+	// @RepeatSubmitLimiter
+	public R<User> getUserNoClass() {
+		User user = RedissonUtil.get("user", User.class);
+		if (Objects.isNull(user)) {
+			user = new User();
+			user.setUserName("潘骁超");
+			user.setCreateDate(new Date());
+			user.setCreateDateTime(LocalDateTime.now());
+			user.setState("1");
+			RedissonUtil.set("user", user, Duration.ofSeconds(60));
+		}
+		else {
+			LOGGER.info("user get from Redis !");
+		}
+		return R.ok(user);
+	}
+
+	@Operation(summary = "无参接口2", description = "无参接口描述", method = "GET")
 	@GetMapping("/get/pxc/{id}")
 	// @RateLimiter(key = "#id", rateLimiterType = RateLimiter.RateLimiterType.SINGLE)
 	// @Cacheable(cacheNames = "user", key = "#id")
@@ -121,36 +157,36 @@ public class TestController {
 	/**
 	 * Redis publish 发布通知
 	 */
-	// @GetMapping("/redis/publish")
-	// public R<String> publish() {
-	// for (int i = 0; i < 10; i++) {
-	// RedissonUtil.publish("publishKey", "publish msg: " + LocalDateTime.now());
-	// }
-	// return R.ok();
-	// }
+	@GetMapping("/redis/publish")
+	public R<String> publish() {
+		for (int i = 0; i < 10; i++) {
+			RedissonUtil.publish("publishKey", "publish msg: " + LocalDateTime.now());
+		}
+		return R.ok();
+	}
 
 	/**
 	 * Redis 缓存监控
 	 */
-	// @GetMapping("/redis/cache")
-	// public R<Properties> redisCache() {
-	// RedisConnection connection = connectionFactory.getConnection();
-	// Properties commandStats = connection.info("commandstats");
-	//
-	// List<Map<String, String>> pieList = new ArrayList<>();
-	// if (commandStats != null) {
-	// commandStats.stringPropertyNames().forEach(key -> {
-	// Map<String, String> data = new HashMap<>(2);
-	// String property = commandStats.getProperty(key);
-	// data.put("name", StrUtil.removeStart(key, "cmdstat_"));
-	// data.put("value", StrUtil.substringBetween(property, "calls=", ",usec"));
-	// pieList.add(data);
-	// });
-	// }
-	// System.out.println(pieList);
-	// System.out.println(connection.dbSize());
-	// return R.ok(connection.info());
-	// }
+	@GetMapping("/redis/cache")
+	public R<Properties> redisCache() {
+		RedisConnection connection = connectionFactory.getConnection();
+		Properties commandStats = connection.info("commandstats");
+
+		List<Map<String, String>> pieList = new ArrayList<>();
+		if (commandStats != null) {
+			commandStats.stringPropertyNames().forEach(key -> {
+				Map<String, String> data = new HashMap<>(2);
+				String property = commandStats.getProperty(key);
+				data.put("name", StrUtil.removeStart(key, "cmdstat_"));
+				data.put("value", StrUtil.substringBetween(property, "calls=", ",usec"));
+				pieList.add(data);
+			});
+		}
+		System.out.println(pieList);
+		System.out.println(connection.dbSize());
+		return R.ok(connection.info());
+	}
 
 	/**
 	 * Redis 分页

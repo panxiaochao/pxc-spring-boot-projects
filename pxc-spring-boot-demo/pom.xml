@@ -27,6 +27,10 @@
             <artifactId>pxc-framework-boot4-crypto</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.github.panxiaochao</groupId>
+            <artifactId>pxc-framework-boot4-redis</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
