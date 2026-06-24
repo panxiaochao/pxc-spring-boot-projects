@@ -14,6 +14,8 @@ spring:
       enabled: true
   # pxc-framework 属性
   pxc-framework-boot3:
+    ok-http:
+      trace-log: true
     async: true
     operatelog:
       handler: io.github.test.handle.OperateLogHandler

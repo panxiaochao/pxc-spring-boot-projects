@@ -4,7 +4,7 @@
 - **接口名称**：根据学校ID获取学校详情
 - **接口描述**：根据学校ID获取学校详情
 - **请求方法**：GET
-- **完整请求路径**：`https://api_server_url/school/info`
+- **完整请求路径**：`https://jyjzhfw.qiantang.gov.cn/tyba/open-api/school/info`
 
 ## 请求参数
 
@@ -106,7 +106,7 @@
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://api_server_url/school/info?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&schoolId=1158',
+  url: 'https://jyjzhfw.qiantang.gov.cn/tyba/open-api/school/info?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&schoolId=1158',
   headers: {
     'X-App-Id': '1'
   }
@@ -125,7 +125,7 @@ axios(config)
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://api_server_url/school/info?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&schoolId=1158")
+  .url("https://jyjzhfw.qiantang.gov.cn/tyba/open-api/school/info?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&schoolId=1158")
   .method("GET", null)
   .addHeader("X-App-Id", "1")
   .build();

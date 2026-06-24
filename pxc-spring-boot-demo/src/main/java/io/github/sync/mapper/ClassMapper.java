@@ -1,7 +1,7 @@
 package io.github.sync.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.sync.po.ClassEntity;
+import io.github.sync.po.Classes;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2026-06-24
  */
 @Mapper
-public interface ClassMapper extends BaseMapper<ClassEntity> {
+public interface ClassMapper extends BaseMapper<Classes> {
 
 }

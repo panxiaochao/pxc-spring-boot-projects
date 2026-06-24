@@ -4,7 +4,7 @@
 - **接口名称**：根据年级ID获取班级列表
 - **接口描述**：根据年级ID获取年级下的班级列表
 - **请求方法**：GET
-- **完整请求路径**：`https://api_server_url/school/campus/grade/class/list`
+- **完整请求路径**：`https://jyjzhfw.qiantang.gov.cn/tyba/open-api/school/campus/grade/class/list`
 
 ## 请求参数
 
@@ -90,7 +90,7 @@
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://api_server_url/school/campus/grade/class/list?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&gradeId=1001',
+  url: 'https://jyjzhfw.qiantang.gov.cn/tyba/open-api/school/campus/grade/class/list?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&gradeId=1001',
   headers: {
     'X-App-Id': '1'
   }
@@ -109,7 +109,7 @@ axios(config)
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://api_server_url/school/campus/grade/class/list?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&gradeId=1001")
+  .url("https://jyjzhfw.qiantang.gov.cn/tyba/open-api/school/campus/grade/class/list?accessToken=AT-10-R6Bl-dFf8itd6BM-pdSMzKRTR-kTmlpO&gradeId=1001")
   .method("GET", null)
   .addHeader("X-App-Id", "1")
   .build();

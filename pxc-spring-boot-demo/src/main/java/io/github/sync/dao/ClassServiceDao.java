@@ -1,6 +1,6 @@
 package io.github.sync.dao;
 
-import io.github.sync.po.ClassEntity;
+import io.github.sync.po.Classes;
 
 /**
  * <p>
@@ -17,13 +17,13 @@ public interface ClassServiceDao {
 	 * @param classEntity 班级信息
 	 * @return 是否成功
 	 */
-	boolean save(ClassEntity classEntity);
+	boolean save(Classes classEntity);
 
 	/**
 	 * 更新班级信息
 	 * @param classEntity 班级信息
 	 * @return 是否成功
 	 */
-	boolean update(ClassEntity classEntity);
+	boolean update(Classes classEntity);
 
 }

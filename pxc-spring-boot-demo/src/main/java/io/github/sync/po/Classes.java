@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@TableName("class")
-public class ClassEntity {
+@TableName("classes")
+public class Classes {
 
 	@TableId(value = "id", type = IdType.NONE)
 	private Long id;

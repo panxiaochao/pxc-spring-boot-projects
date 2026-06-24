@@ -3,7 +3,7 @@ package io.github.sync.dao.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.sync.dao.ClassServiceDao;
 import io.github.sync.mapper.ClassMapper;
-import io.github.sync.po.ClassEntity;
+import io.github.sync.po.Classes;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class ClassServiceImpl extends ServiceImpl<ClassMapper, ClassEntity> implements ClassServiceDao {
+public class ClassServiceImpl extends ServiceImpl<ClassMapper, Classes> implements ClassServiceDao {
 
 	/**
 	 * LOGGER ClassServiceImpl.class
@@ -29,13 +29,13 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, ClassEntity> impl
 	private final ClassMapper classMapper;
 
 	@Override
-	public boolean save(ClassEntity classEntity) {
+	public boolean save(Classes classEntity) {
 		LOGGER.info("保存班级信息: {}", classEntity);
 		return save(classEntity);
 	}
 
 	@Override
-	public boolean update(ClassEntity classEntity) {
+	public boolean update(Classes classEntity) {
 		LOGGER.info("更新班级信息: {}", classEntity);
 		return updateById(classEntity);
 	}
