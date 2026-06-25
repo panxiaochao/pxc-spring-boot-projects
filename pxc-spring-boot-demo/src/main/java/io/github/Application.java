@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
@@ -24,6 +25,7 @@ import java.net.InetAddress;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableCaching
+@EnableScheduling
 public class Application {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
