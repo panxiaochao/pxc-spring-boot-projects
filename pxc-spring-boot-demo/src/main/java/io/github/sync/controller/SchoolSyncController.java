@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * <p>
- * 同步数据 - 暂时
+ * 学校同步数据 - 测试用
  * </p>
  *
  * @author lypxc
@@ -23,10 +23,10 @@ import java.util.Map;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/sync")
+@RequestMapping("/school-sync")
 @RequiredArgsConstructor
 @Slf4j
-public class SyncController {
+public class SchoolSyncController {
 
 	// 批量获取单位信息
 	private static final String unit_url = "https://jyjzhfw.qiantang.gov.cn/tyba/open-api/unit/list";

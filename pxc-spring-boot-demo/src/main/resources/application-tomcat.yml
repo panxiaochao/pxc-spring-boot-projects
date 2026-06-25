@@ -14,16 +14,14 @@ spring:
 #      enabled: true
   # pxc-framework 属性
   pxc-framework-boot3:
-    ok-http:
-      trace-log: false
     async: true
     operatelog:
       handler: io.github.test.handle.OperateLogHandler
       log-type: custom
-    cache:
-      cache-type: redis
-    ip2region:
-      v6db-location: classpath:ip2region/v6/ip2region_v6.xdb
+#    cache:
+#      cache-type: redis
+#    ip2region:
+#      v6db-location: classpath:ip2region/v6/ip2region_v6.xdb
   #    redis:
   #      key-prefix: pxc
   main:
