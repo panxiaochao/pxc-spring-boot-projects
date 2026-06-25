@@ -300,7 +300,7 @@ public class SchoolSyncService {
 
 			// 解析返回的学校数据
 			JsonNode dataNode = jsonNode.get("data");
-			return JacksonUtil.toBean(dataNode, new TypeReference<List<School>>() {
+			return JacksonUtil.toBean(dataNode, new TypeReference<>() {
 			});
 		}
 		catch (Exception e) {
@@ -757,6 +757,7 @@ public class SchoolSyncService {
 		// 先从缓存获取
 		String token = RedissonUtil.get(ACCESS_TOKEN_CACHE_KEY);
 		if (token != null && !token.isEmpty()) {
+			log.info("【安全获取token】从缓存获取token！");
 			return token;
 		}
 
@@ -771,6 +772,7 @@ public class SchoolSyncService {
 					if (token != null && !token.isEmpty()) {
 						return token;
 					}
+					log.info("accessToken 未命中缓存，尝试获取新token！");
 
 					// 缓存仍未命中，获取新 token
 					token = fetchNewToken();
