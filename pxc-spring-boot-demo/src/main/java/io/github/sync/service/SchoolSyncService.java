@@ -330,7 +330,7 @@ public class SchoolSyncService {
 			}
 
 			JsonNode dataNode = jsonNode.get("data");
-			return JacksonUtil.toBean(dataNode, new TypeReference<List<School>>() {
+			return JacksonUtil.toBean(dataNode, new TypeReference<>() {
 			});
 		}
 		catch (Exception e) {
@@ -378,7 +378,7 @@ public class SchoolSyncService {
 
 			// 如果有校区数据，将校区ID加入年级同步队列
 			if (!campuses.isEmpty()) {
-				enqueGradeSyncTasks(campuses);
+				enqueueGradeSyncTasks(campuses);
 			}
 
 			log.debug("【队列消费】学校 {} 的校区同步完成, 获取到 {} 个校区", schoolId, campuses.size());
@@ -414,7 +414,7 @@ public class SchoolSyncService {
 
 				// 如果有校区数据，将校区ID加入年级同步队列
 				if (!campuses.isEmpty()) {
-					enqueGradeSyncTasks(campuses);
+					enqueueGradeSyncTasks(campuses);
 				}
 			}
 			catch (InterruptedException e) {
@@ -453,7 +453,7 @@ public class SchoolSyncService {
 
 			// 解析校区数据
 			JsonNode dataNode = jsonNode.get("data");
-			List<Campus> campusList = JacksonUtil.toBean(dataNode, new TypeReference<List<Campus>>() {
+			List<Campus> campusList = JacksonUtil.toBean(dataNode, new TypeReference<>() {
 			});
 
 			if (campusList == null || campusList.isEmpty()) {
@@ -474,10 +474,10 @@ public class SchoolSyncService {
 	 * 将校区ID列表加入年级同步队列
 	 * @param campuses 校区列表
 	 */
-	private void enqueGradeSyncTasks(List<Campus> campuses) {
+	private void enqueueGradeSyncTasks(List<Campus> campuses) {
 		RBlockingQueue<String> queue = redissonClient.getBlockingQueue(GRADE_SYNC_QUEUE_KEY);
 		// 提取校区ID列表
-		List<String> campusIds = campuses.stream().map(Campus::getId).map(String::valueOf).collect(Collectors.toList());
+		List<String> campusIds = campuses.stream().map(Campus::getId).map(String::valueOf).toList();
 
 		try {
 			// 批量加入队列
@@ -584,7 +584,7 @@ public class SchoolSyncService {
 
 			// 解析年级数据
 			JsonNode dataNode = jsonNode.get("data");
-			List<Grade> gradeList = JacksonUtil.toBean(dataNode, new TypeReference<List<Grade>>() {
+			List<Grade> gradeList = JacksonUtil.toBean(dataNode, new TypeReference<>() {
 			});
 
 			if (gradeList == null || gradeList.isEmpty()) {
@@ -704,7 +704,7 @@ public class SchoolSyncService {
 
 			// 解析班级数据
 			JsonNode dataNode = jsonNode.get("data");
-			List<Classes> classList = JacksonUtil.toBean(dataNode, new TypeReference<List<Classes>>() {
+			List<Classes> classList = JacksonUtil.toBean(dataNode, new TypeReference<>() {
 			});
 
 			if (classList == null || classList.isEmpty()) {
