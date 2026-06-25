@@ -4,9 +4,9 @@
 -- 创建单位表
 CREATE TABLE `unit` (
   `id` BIGINT NOT NULL COMMENT '单位ID',
-  `org_id` BIGINT NOT NULL COMMENT '组织机构ID',
+  `org_id` BIGINT DEFAULT NULL COMMENT '组织机构ID',
   `dwdm` VARCHAR(50) DEFAULT NULL COMMENT '单位代码',
-  `dwmc` VARCHAR(200) NOT NULL COMMENT '单位名称',
+  `dwmc` VARCHAR(200) DEFAULT NULL COMMENT '单位名称',
   `dwywmc` VARCHAR(200) DEFAULT NULL COMMENT '单位英文名称',
   `dwdz` VARCHAR(500) DEFAULT NULL COMMENT '单位地址',
   `dwyzbm` VARCHAR(10) DEFAULT NULL COMMENT '单位邮政编码',
@@ -25,11 +25,11 @@ CREATE TABLE `unit` (
 -- 创建学校表
 CREATE TABLE `school` (
   `id` BIGINT NOT NULL COMMENT '学校ID',
-  `org_id` BIGINT NOT NULL COMMENT '组织机构ID',
+  `org_id` BIGINT DEFAULT NULL COMMENT '组织机构ID',
   `xxbsm` VARCHAR(50) DEFAULT NULL COMMENT '学校标识码',
   `xxbxlxm` VARCHAR(50) DEFAULT NULL COMMENT '办学类型码',
-  `xxdm` VARCHAR(50) NOT NULL COMMENT '学校代码',
-  `xxmc` VARCHAR(200) NOT NULL COMMENT '学校名称',
+  `xxdm` VARCHAR(50) DEFAULT NULL COMMENT '学校代码',
+  `xxmc` VARCHAR(200) DEFAULT NULL COMMENT '学校名称',
   `xxdz` VARCHAR(500) DEFAULT NULL COMMENT '学校地址',
   `xxjc` VARCHAR(100) DEFAULT NULL COMMENT '学校简称',
   `xxjj` TEXT DEFAULT NULL COMMENT '学校简介',
@@ -55,14 +55,14 @@ CREATE TABLE `school` (
 -- 创建校区表
 CREATE TABLE `campus` (
   `id` BIGINT NOT NULL COMMENT '校区ID',
-  `org_id` BIGINT NOT NULL COMMENT '组织机构ID',
-  `xqdm` VARCHAR(50) NOT NULL COMMENT '校区代码',
-  `xqmc` VARCHAR(200) NOT NULL COMMENT '校区名称',
+  `org_id` BIGINT DEFAULT NULL COMMENT '组织机构ID',
+  `xqdm` VARCHAR(50) DEFAULT NULL COMMENT '校区代码',
+  `xqmc` VARCHAR(200) DEFAULT NULL COMMENT '校区名称',
   `xqm` VARCHAR(50) DEFAULT NULL COMMENT '校区码',
   `xqzt` VARCHAR(10) DEFAULT NULL COMMENT '校区状态',
   `sfxnxq` TINYINT DEFAULT 0 COMMENT '是否虚拟校区(0:否,1:是)',
   `sfzxqm` TINYINT DEFAULT 0 COMMENT '是否主校区(0:主校,1:分校)',
-  `xxdm` VARCHAR(50) NOT NULL COMMENT '学校代码',
+  `xxdm` VARCHAR(50) DEFAULT NULL COMMENT '学校代码',
   `xxmc` VARCHAR(200) DEFAULT NULL COMMENT '学校名称',
   `szzqzxs` VARCHAR(50) DEFAULT NULL COMMENT '省(自治区、直辖市)',
   `dsz` VARCHAR(50) DEFAULT NULL COMMENT '地(市、州)',
@@ -86,10 +86,10 @@ CREATE TABLE `campus` (
 -- 创建年级表
 CREATE TABLE `grade` (
   `id` BIGINT NOT NULL COMMENT '年级ID',
-  `org_id` BIGINT NOT NULL COMMENT '组织机构ID',
-  `njdm` VARCHAR(50) NOT NULL COMMENT '年级代码',
-  `njmc` VARCHAR(100) NOT NULL COMMENT '年级名称',
-  `xqdm` VARCHAR(50) NOT NULL COMMENT '校区代码',
+  `org_id` BIGINT DEFAULT NULL COMMENT '组织机构ID',
+  `njdm` VARCHAR(50) DEFAULT NULL COMMENT '年级代码',
+  `njmc` VARCHAR(100) DEFAULT NULL COMMENT '年级名称',
+  `xqdm` VARCHAR(50) DEFAULT NULL COMMENT '校区代码',
   `create_time` DATETIME DEFAULT NULL COMMENT '创建时间',
   `update_time` DATETIME DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -101,11 +101,11 @@ CREATE TABLE `grade` (
 -- 创建班级表
 CREATE TABLE `class` (
   `id` BIGINT NOT NULL COMMENT '班级ID',
-  `org_id` BIGINT NOT NULL COMMENT '组织机构ID',
-  `bjdm` VARCHAR(50) NOT NULL COMMENT '班级代码',
+  `org_id` BIGINT DEFAULT NULL COMMENT '组织机构ID',
+  `bjdm` VARCHAR(50) DEFAULT NULL COMMENT '班级代码',
   `bj` VARCHAR(50) DEFAULT NULL COMMENT '班号',
-  `bjmc` VARCHAR(100) NOT NULL COMMENT '班级名称',
-  `njdm` VARCHAR(50) NOT NULL COMMENT '年级代码',
+  `bjmc` VARCHAR(100) DEFAULT NULL COMMENT '班级名称',
+  `njdm` VARCHAR(50) DEFAULT NULL COMMENT '年级代码',
   `create_time` DATETIME DEFAULT NULL COMMENT '创建时间',
   `update_time` DATETIME DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
