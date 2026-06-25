@@ -754,7 +754,7 @@ public class SchoolSyncService {
 	 * token
 	 * @return access_token
 	 */
-	private String getAccessTokenSafely() {
+	public String getAccessTokenSafely() {
 		// 先从缓存获取
 		String token = RedissonUtil.get(ACCESS_TOKEN_CACHE_KEY);
 		if (token != null && !token.isEmpty()) {
