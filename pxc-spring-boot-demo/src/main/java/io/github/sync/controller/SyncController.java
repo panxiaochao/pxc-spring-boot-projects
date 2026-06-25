@@ -1,7 +1,6 @@
 package io.github.sync.controller;
 
 import io.github.panxiaochao.boot3.common.response.R;
-import io.github.panxiaochao.boot3.utils.JacksonUtil;
 import io.github.panxiaochao.boot3.utils.OkHttp3Util;
 import io.github.sync.service.SchoolSyncService;
 import lombok.RequiredArgsConstructor;
@@ -85,7 +84,7 @@ public class SyncController {
 
 		try {
 			String result = OkHttp3Util.doGet(school_url, params, header);
-			return R.ok(JacksonUtil.toMap(result));
+			return R.ok(result);
 		}
 		catch (Exception e) {
 			return R.fail("获取校区列表失败: " + e.getMessage());
@@ -107,7 +106,7 @@ public class SyncController {
 
 		try {
 			String result = OkHttp3Util.doGet(campus_url, params, header);
-			return R.ok(JacksonUtil.toMap(result));
+			return R.ok(result);
 		}
 		catch (Exception e) {
 			return R.fail("获取学校详情失败: " + e.getMessage());
@@ -129,7 +128,7 @@ public class SyncController {
 
 		try {
 			String result = OkHttp3Util.doGet(GRADE_URL, params, header);
-			return R.ok(JacksonUtil.toMap(result));
+			return R.ok(result);
 		}
 		catch (Exception e) {
 			return R.fail("获取年级列表失败: " + e.getMessage());
@@ -151,7 +150,7 @@ public class SyncController {
 
 		try {
 			String result = OkHttp3Util.doGet(CLASS_URL, params, header);
-			return R.ok(JacksonUtil.toMap(result));
+			return R.ok(result);
 		}
 		catch (Exception e) {
 			return R.fail("获取班级列表失败: " + e.getMessage());

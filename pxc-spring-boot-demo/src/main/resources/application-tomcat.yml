@@ -9,9 +9,9 @@ server:
 
 
 spring:
-  threads:
-    virtual:
-      enabled: true
+#  threads:
+#    virtual:
+#      enabled: true
   # pxc-framework 属性
   pxc-framework-boot3:
     ok-http:
