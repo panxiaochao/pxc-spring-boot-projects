@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@TableName("grade")
+@TableName("sync_grade")
 public class Grade {
 
 	@TableId(value = "id", type = IdType.NONE)

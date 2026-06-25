@@ -1,7 +1,7 @@
 package io.github.sync.controller;
 
 import io.github.panxiaochao.boot3.common.response.R;
-import io.github.sync.service.HybridSyncService;
+import io.github.sync.service.SchoolSyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -280,13 +280,13 @@ public class SyncController {
 	// }
 	// }
 
-	private final HybridSyncService hybridSyncService;
+	private final SchoolSyncService schoolSyncService;
 
 	@GetMapping("/fullSync")
 	public R<String> triggerFullSync() {
 		log.info("手动触发全量同步");
 		try {
-			HybridSyncService.SyncResult result = hybridSyncService.fullSync();
+			SchoolSyncService.SyncResult result = schoolSyncService.fullSync();
 			return R.ok(String.format("全量同步完成 - 学校: %d 条, 校区: %d 条, 年级: %d 条, 班级: %d 条", result.getSchoolCount(),
 					result.getCampusCount(), result.getGradeCount(), result.getClassCount()));
 		}
@@ -301,7 +301,7 @@ public class SyncController {
 		log.info("手动触发增量同步");
 		try {
 			long lastSequence = 0;
-			HybridSyncService.SyncResult result = hybridSyncService.incrementalSync(lastSequence);
+			SchoolSyncService.SyncResult result = schoolSyncService.incrementalSync(lastSequence);
 			return R.ok(String.format("增量同步完成 - 学校: %d 条, 校区: %d 条, 年级: %d 条, 班级: %d 条", result.getSchoolCount(),
 					result.getCampusCount(), result.getGradeCount(), result.getClassCount()));
 		}
@@ -314,9 +314,9 @@ public class SyncController {
 	@GetMapping("/queueStatus")
 	public R<String> getQueueStatus() {
 		try {
-			long campusQueueSize = hybridSyncService.getCampusQueueSize();
-			long gradeQueueSize = hybridSyncService.getGradeQueueSize();
-			long classQueueSize = hybridSyncService.getClassQueueSize();
+			long campusQueueSize = schoolSyncService.getCampusQueueSize();
+			long gradeQueueSize = schoolSyncService.getGradeQueueSize();
+			long classQueueSize = schoolSyncService.getClassQueueSize();
 
 			String status = String.format("队列状态 - 校区: %d 个待处理, 年级: %d 个待处理, 班级: %d 个待处理", campusQueueSize,
 					gradeQueueSize, classQueueSize);

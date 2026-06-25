@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@TableName("unit")
+@TableName("sync_unit")
 public class Unit {
 
 	@TableId(value = "id", type = IdType.NONE)
