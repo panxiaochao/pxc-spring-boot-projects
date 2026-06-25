@@ -20,7 +20,6 @@ import okhttp3.HttpUrl;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -32,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -361,36 +359,37 @@ public class SchoolSyncService {
 	/**
 	 * 校区同步队列消费者（定时任务） 每2秒从队列中取出一个学校ID，获取并保存其校区数据，然后将校区ID加入年级同步队列
 	 */
-	@Scheduled(fixedDelay = 2000)
-	public void consumeCampusQueue() {
-		RBlockingQueue<String> queue = redissonClient.getBlockingQueue(CAMPUS_SYNC_QUEUE_KEY);
-
-		try {
-			// 从队列中阻塞获取学校ID（最多等待2秒）
-			String schoolId = queue.poll(2, TimeUnit.SECONDS);
-			if (schoolId == null) {
-				return;
-			}
-
-			log.debug("【队列消费】处理校区同步任务 - schoolId: {}", schoolId);
-			// 获取并保存校区数据
-			List<Campus> campuses = fetchAndSaveCampus(Long.parseLong(schoolId));
-
-			// 如果有校区数据，将校区ID加入年级同步队列
-			if (!campuses.isEmpty()) {
-				enqueueGradeSyncTasks(campuses);
-			}
-
-			log.debug("【队列消费】学校 {} 的校区同步完成, 获取到 {} 个校区", schoolId, campuses.size());
-		}
-		catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-			log.error("【队列消费】校区队列消费被中断", e);
-		}
-		catch (Exception e) {
-			log.error("【队列消费】处理校区同步任务异常", e);
-		}
-	}
+	// @Scheduled(fixedDelay = 2000)
+	// public void consumeCampusQueue() {
+	// RBlockingQueue<String> queue =
+	// redissonClient.getBlockingQueue(CAMPUS_SYNC_QUEUE_KEY);
+	//
+	// try {
+	// // 从队列中阻塞获取学校ID（最多等待2秒）
+	// String schoolId = queue.poll(2, TimeUnit.SECONDS);
+	// if (schoolId == null) {
+	// return;
+	// }
+	//
+	// log.debug("【队列消费】处理校区同步任务 - schoolId: {}", schoolId);
+	// // 获取并保存校区数据
+	// List<Campus> campuses = fetchAndSaveCampus(Long.parseLong(schoolId));
+	//
+	// // 如果有校区数据，将校区ID加入年级同步队列
+	// if (!campuses.isEmpty()) {
+	// enqueueGradeSyncTasks(campuses);
+	// }
+	//
+	// log.debug("【队列消费】学校 {} 的校区同步完成, 获取到 {} 个校区", schoolId, campuses.size());
+	// }
+	// catch (InterruptedException e) {
+	// Thread.currentThread().interrupt();
+	// log.error("【队列消费】校区队列消费被中断", e);
+	// }
+	// catch (Exception e) {
+	// log.error("【队列消费】处理校区同步任务异常", e);
+	// }
+	// }
 
 	/**
 	 * 处理所有校区同步任务（全量同步用） 循环处理队列中的所有校区同步任务，直到队列为空
@@ -492,36 +491,37 @@ public class SchoolSyncService {
 	/**
 	 * 年级同步队列消费者（定时任务） 每2秒从队列中取出一个校区ID，获取并保存其年级数据，然后将年级ID加入班级同步队列
 	 */
-	@Scheduled(fixedDelay = 2000)
-	public void consumeGradeQueue() {
-		RBlockingQueue<String> queue = redissonClient.getBlockingQueue(GRADE_SYNC_QUEUE_KEY);
-
-		try {
-			// 从队列中阻塞获取校区ID（最多等待2秒）
-			String campusId = queue.poll(2, TimeUnit.SECONDS);
-			if (campusId == null) {
-				return;
-			}
-
-			log.debug("【队列消费】处理年级同步任务 - campusId: {}", campusId);
-			// 获取并保存年级数据
-			List<Grade> grades = fetchAndSaveGrade(Long.parseLong(campusId));
-
-			// 如果有年级数据，将年级ID加入班级同步队列
-			if (!grades.isEmpty()) {
-				enqueClassSyncTasks(grades);
-			}
-
-			log.debug("【队列消费】校区 {} 的年级同步完成, 获取到 {} 个年级", campusId, grades.size());
-		}
-		catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-			log.error("【队列消费】年级队列消费被中断", e);
-		}
-		catch (Exception e) {
-			log.error("【队列消费】处理年级同步任务异常", e);
-		}
-	}
+	// @Scheduled(fixedDelay = 2000)
+	// public void consumeGradeQueue() {
+	// RBlockingQueue<String> queue =
+	// redissonClient.getBlockingQueue(GRADE_SYNC_QUEUE_KEY);
+	//
+	// try {
+	// // 从队列中阻塞获取校区ID（最多等待2秒）
+	// String campusId = queue.poll(2, TimeUnit.SECONDS);
+	// if (campusId == null) {
+	// return;
+	// }
+	//
+	// log.debug("【队列消费】处理年级同步任务 - campusId: {}", campusId);
+	// // 获取并保存年级数据
+	// List<Grade> grades = fetchAndSaveGrade(Long.parseLong(campusId));
+	//
+	// // 如果有年级数据，将年级ID加入班级同步队列
+	// if (!grades.isEmpty()) {
+	// enqueueClassSyncTasks(grades);
+	// }
+	//
+	// log.debug("【队列消费】校区 {} 的年级同步完成, 获取到 {} 个年级", campusId, grades.size());
+	// }
+	// catch (InterruptedException e) {
+	// Thread.currentThread().interrupt();
+	// log.error("【队列消费】年级队列消费被中断", e);
+	// }
+	// catch (Exception e) {
+	// log.error("【队列消费】处理年级同步任务异常", e);
+	// }
+	// }
 
 	/**
 	 * 处理所有年级同步任务（全量同步用） 循环处理队列中的所有年级同步任务，直到队列为空
@@ -545,7 +545,7 @@ public class SchoolSyncService {
 
 				// 如果有年级数据，将年级ID加入班级同步队列
 				if (!grades.isEmpty()) {
-					enqueClassSyncTasks(grades);
+					enqueueClassSyncTasks(grades);
 				}
 			}
 			catch (InterruptedException e) {
@@ -605,10 +605,10 @@ public class SchoolSyncService {
 	 * 将年级ID列表加入班级同步队列
 	 * @param grades 年级列表
 	 */
-	private void enqueClassSyncTasks(List<Grade> grades) {
+	private void enqueueClassSyncTasks(List<Grade> grades) {
 		RBlockingQueue<String> queue = redissonClient.getBlockingQueue(CLASS_SYNC_QUEUE_KEY);
 		// 提取年级ID列表
-		List<String> gradeIds = grades.stream().map(Grade::getId).map(String::valueOf).collect(Collectors.toList());
+		List<String> gradeIds = grades.stream().map(Grade::getId).map(String::valueOf).toList();
 
 		try {
 			// 批量加入队列
@@ -623,30 +623,31 @@ public class SchoolSyncService {
 	/**
 	 * 班级同步队列消费者（定时任务） 每2秒从队列中取出一个年级ID，获取并保存其班级数据
 	 */
-	@Scheduled(fixedDelay = 2000)
-	public void consumeClassQueue() {
-		RBlockingQueue<String> queue = redissonClient.getBlockingQueue(CLASS_SYNC_QUEUE_KEY);
-
-		try {
-			// 从队列中阻塞获取年级ID（最多等待2秒）
-			String gradeId = queue.poll(2, TimeUnit.SECONDS);
-			if (gradeId == null) {
-				return;
-			}
-
-			log.debug("【队列消费】处理班级同步任务 - gradeId: {}", gradeId);
-			// 获取并保存班级数据
-			List<Classes> classes = fetchAndSaveClass(Long.parseLong(gradeId));
-			log.debug("【队列消费】年级 {} 的班级同步完成, 获取到 {} 个班级", gradeId, classes.size());
-		}
-		catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-			log.error("【队列消费】班级队列消费被中断", e);
-		}
-		catch (Exception e) {
-			log.error("【队列消费】处理班级同步任务异常", e);
-		}
-	}
+	// @Scheduled(fixedDelay = 2000)
+	// public void consumeClassQueue() {
+	// RBlockingQueue<String> queue =
+	// redissonClient.getBlockingQueue(CLASS_SYNC_QUEUE_KEY);
+	//
+	// try {
+	// // 从队列中阻塞获取年级ID（最多等待2秒）
+	// String gradeId = queue.poll(2, TimeUnit.SECONDS);
+	// if (gradeId == null) {
+	// return;
+	// }
+	//
+	// log.debug("【队列消费】处理班级同步任务 - gradeId: {}", gradeId);
+	// // 获取并保存班级数据
+	// List<Classes> classes = fetchAndSaveClass(Long.parseLong(gradeId));
+	// log.debug("【队列消费】年级 {} 的班级同步完成, 获取到 {} 个班级", gradeId, classes.size());
+	// }
+	// catch (InterruptedException e) {
+	// Thread.currentThread().interrupt();
+	// log.error("【队列消费】班级队列消费被中断", e);
+	// }
+	// catch (Exception e) {
+	// log.error("【队列消费】处理班级同步任务异常", e);
+	// }
+	// }
 
 	/**
 	 * 处理所有班级同步任务（全量同步用） 循环处理队列中的所有班级同步任务，直到队列为空
